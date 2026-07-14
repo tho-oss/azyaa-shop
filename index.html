@@ -689,52 +689,33 @@
    بدلاً من التخزين المحلي، حتى كل الأجهزة (المالك/الكاشير/البائعين) تشوف نفس البيانات لحظياً.
    إذا ما انعدلت بيانات firebaseConfig أعلاه، البرنامج يشتغل بتخزين محلي مؤقت بالجهاز بس (احتياطي). */
 window.storage = (function(){
-  let fbReady = false;
   let fbDB = null;
   try{
     firebase.initializeApp({
-  apiKey: "AIzaSyBi1yhOonLtD3rK-VEmeU_a6bBBOLrYa00",
-  authDomain: "azyaa-shop.firebaseapp.com",
-  databaseURL: "https://azyaa-shop-default-rtdb.firebaseio.com",
-  projectId: "azyaa-shop",
-  storageBucket: "azyaa-shop.firebasestorage.app",
-  messagingSenderId: "512702638642",
-  appId: "1:512702638642:web:6b23b818b2c2ad8f442a2b"
-});
-fbDB = firebase.database();
-      fbReady = true;
-    }else{
-      console.warn('Firebase مو معدّل بعد — البرنامج يستخدم تخزين محلي مؤقت بالجهاز بس.');
-    }
+      apiKey: "AIzaSyBi1yhOonLtD3rK-VEmeU_a6bBBOLrYa00",
+      authDomain: "azyaa-shop.firebaseapp.com",
+      databaseURL: "https://azyaa-shop-default-rtdb.firebaseio.com",
+      projectId: "azyaa-shop",
+      storageBucket: "azyaa-shop.firebasestorage.app",
+      messagingSenderId: "512702638642",
+      appId: "1:512702638642:web:6b23b818b2c2ad8f442a2b"
+    });
+    fbDB = firebase.database();
   }catch(e){
-    console.error('فشل الاتصال بـ Firebase، رجع لتخزين محلي:', e);
+    console.error('فشل الاتصال بـ Firebase:', e);
   }
 
   function pathOf(key){ return key.replace(/:/g, '/'); }
 
   return {
     async get(key){
-      if(fbReady){
-        try{
-          const snap = await fbDB.ref(pathOf(key)).get();
-          return snap.exists() ? {value: snap.val()} : null;
-        }catch(e){
-          console.error('Firebase get error:', e);
-        }
-      }
-      const v = localStorage.getItem(key);
-      return v == null ? null : {value: v};
+      if(!fbDB) throw new Error('Firebase غير متصل');
+      const snap = await fbDB.ref(pathOf(key)).get();
+      return snap.exists() ? {value: snap.val()} : null;
     },
     async set(key, value){
-      if(fbReady){
-        try{
-          await fbDB.ref(pathOf(key)).set(value);
-          return {key, value};
-        }catch(e){
-          console.error('Firebase set error:', e);
-        }
-      }
-      localStorage.setItem(key, value);
+      if(!fbDB) throw new Error('Firebase غير متصل');
+      await fbDB.ref(pathOf(key)).set(value);
       return {key, value};
     }
   };
@@ -761,6 +742,7 @@ const SALES_KEY = 'shop:sales';
 /* ========================= STORAGE ========================= */
 async function loadAll(){
   let loaded = false;
+  let connectionFailed = false;
   try{
     const cfgRes = await window.storage.get(CONFIG_KEY, true);
     if(cfgRes && cfgRes.value){
@@ -775,8 +757,17 @@ async function loadAll(){
       theme = cfg.theme || 'light';
       loaded = true;
     }
-  }catch(e){}
+  }catch(e){
+    console.error('تعذر الاتصال بـ Firebase:', e);
+    connectionFailed = true;
+  }
   applyTheme(theme);
+  if(connectionFailed){
+    // No internet / Firebase unreachable — don't overwrite anything, just show an error and stop.
+    document.getElementById('app').innerHTML =
+      '<div class="receipt"><div class="msg err">ماكو اتصال بقاعدة البيانات (Firebase). تأكد من اتصالك بالنت وحاول تحدّث الصفحة.</div></div>';
+    throw new Error('Firebase connection failed');
+  }
   if(!loaded || !sellers || sellers.length === 0){
     sellers = [
       {id:'s1', name:'أحمد'},
@@ -1517,10 +1508,34 @@ function calcRangeReport(){
 function renderSellerManageList(){
   const box = document.getElementById('owner-seller-manage');
   if(sellers.length === 0){
- box.innerHTML = sellers.map(s => `
+    box.innerHTML = '<div class="empty-note">ماكو بائعين مسجلين</div>';
+    return;
+  }
+  box.innerHTML = sellers.map(s => `
     <div class="seller-manage-row">
-      <span>${s.name}</span>
-      <button class="btn-del" onclick="removeSeller('${s.id}')">✕</button>
+      <span>${escapeHtml(s.name)}</span>
+      <button class="tiny-x" onclick="removeSeller('${s.id}')">✕</button>
+    </div>
+  `).join('');
+}
+
+function renderProductManageList(){
+  const box = document.getElementById('owner-product-manage');
+  if(!box) return;
+  if(products.length === 0){
+    box.innerHTML = '<div class="empty-note">ماكو منتجات مضافة</div>';
+    return;
+  }
+  box.innerHTML = products.map(p => `
+    <div class="product-manage-row">
+      <div class="product-manage-top">
+        <span>${p.commission != null ? `<span class="special-tag">★ مميز</span> ` : ''}${escapeHtml(p.name)}</span>
+        <button class="tiny-x" onclick="removeProduct('${p.id}')">✕</button>
+      </div>
+      <div class="product-manage-commission">
+        <label>عمولة خاصة لهذا المنتج (اتركها فارغة لاستخدام الافتراضي)</label>
+        <input type="number" min="0" placeholder="مثلاً: ${commissionPerPiece}" value="${p.commission != null ? p.commission : ''}" onchange="setProductCommission('${p.id}', this.value)">
+      </div>
     </div>
   `).join('');
 }
@@ -1531,47 +1546,40 @@ async function addSeller(){
   const name = nameEl.value.trim();
   if(!name) return;
 
-  try {
-    if (typeof firebase !== 'undefined') {
-      const dbRef = firebase.database().ref('sellers');
-      const newRef = dbRef.push();
-      await newRef.set({ id: newRef.key, name: name });
-    } else {
-      sellers.push({id: 's_'+Date.now(), name: name});
-      await saveConfig();
-    }
-  } catch(e) {
-    console.error(e);
-    sellers.push({id: 's_'+Date.now(), name: name});
-    await saveConfig();
-  }
+  sellers.push({id: 's_'+Date.now(), name: name});
+  await saveConfig();
 
-  FillSellerSelect();
+  fillSellerSelect();
   nameEl.value = '';
   renderOwnerHome();
 }
 
 async function removeSeller(id){
-  try {
-    if (typeof firebase !== 'undefined') {
-      await firebase.database().ref('sellers/' + id).remove();
-    } else {
-      sellers = sellers.filter(s=>s.id!==id);
-      await saveConfig();
-    }
-  } catch(e) {
-    console.error(e);
-    sellers = sellers.filter(s=>s.id!==id);
-    await saveConfig();
-  }
-  FillSellerSelect();
+  sellers = sellers.filter(s=>s.id!==id);
+  await saveConfig();
+  fillSellerSelect();
   renderOwnerHome();
+}
+
+async function addProduct(){
+  const nameEl = document.getElementById('new-product-name');
+  if(!nameEl) return;
+  const name = nameEl.value.trim();
+  if(!name) return;
+
+  products.push({id: 'p_'+Date.now(), name: name, commission: null});
+  await saveConfig();
+
+  nameEl.value = '';
+  renderProductTiles();
+  renderProductManageList();
 }
 
 async function removeProduct(id){
   products = products.filter(p=>p.id!==id);
   await saveConfig();
-  renderOwnerHome();
+  renderProductTiles();
+  renderProductManageList();
 }
 
 async function setProductCommission(id, val){
@@ -1620,7 +1628,11 @@ function escapeHtml(str){
 
 /* ========================= INIT ========================= */
 (async function init(){
-  await loadAll();
+  try{
+    await loadAll();
+  }catch(e){
+    return; // error message already shown by loadAll()
+  }
   fillSellerSelect();
   showScreen('screen-seller-login');
 })();
