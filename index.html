@@ -1,0 +1,1640 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, viewport-fit=cover">
+<title>سجل المبيعات</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImJnRGFyayIgeDE9IjAiIHkxPSIwIiB4Mj0iNTEyIiB5Mj0iNTEyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iIzJBMjYyMiIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMxNDEyMTAiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImtHb2xkMiIgeDE9IjAiIHkxPSIwIiB4Mj0iNTEyIiB5Mj0iNTEyIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgICAgIDxzdG9wIG9mZnNldD0iMCIgc3RvcC1jb2xvcj0iI0VGQzE3NyIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjAuNTUiIHN0b3AtY29sb3I9IiNDOTk2MkMiLz4KICAgICAgPHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOEE2NDI1Ii8+CiAgICA8L2xpbmVhckdyYWRpZW50PgogIDwvZGVmcz4KCiAgPHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIHJ4PSIxMTQiIGZpbGw9InVybCgjYmdEYXJrKSIvPgoKICA8IS0tIFZlcnRpY2FsIHN0ZW0gLS0+CiAgPHJlY3QgeD0iMTQ4IiB5PSIxMzAiIHdpZHRoPSI1MiIgaGVpZ2h0PSIyNTIiIGZpbGw9InVybCgja0dvbGQyKSIvPgoKICA8IS0tIFVwcGVyIGRpYWdvbmFsIGFybSAtLT4KICA8cGF0aCBkPSJNMjU2IDI0NiBMMzY4IDEzMiBMNDAwIDEzMiBMMjgwIDI1NiBMMjU2IDI1NiBaIiBmaWxsPSJ1cmwoI2tHb2xkMikiLz4KCiAgPCEtLSBMb3dlciBkaWFnb25hbCBhcm0gLS0+CiAgPHBhdGggZD0iTTI1NiAyNjYgTDI4MCAyNjYgTDQwMCAzODAgTDM2OCAzODAgWiIgZmlsbD0idXJsKCNrR29sZDIpIi8+CgogIDwhLS0gRmxvYXRpbmcgZGlhbW9uZCBhY2NlbnQgLS0+CiAgPHJlY3QgeD0iMjIyIiB5PSIyMjIiIHdpZHRoPSI2OCIgaGVpZ2h0PSI2OCIgdHJhbnNmb3JtPSJyb3RhdGUoNDUgMjU2IDI1NikiIGZpbGw9IiNGNkVDRDgiLz4KPC9zdmc+Cg==">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F2F2F7;
+    --card:#FFFFFF;
+    --fill:#F2F2F5;
+    --label:#1C1C1E;
+    --label2:#6C6C70;
+    --label3:#AEAEB2;
+    --sep:rgba(60,60,67,0.13);
+    --tint:#B8863A;
+    --tint-deep:#8F681F;
+    --tint-wash:rgba(184,134,58,.14);
+    --red:#FF3B30;
+    --red-wash:rgba(255,59,48,.12);
+    --green:#30B855;
+    --green-wash:rgba(48,184,85,.12);
+    --shadow-card:0 1px 2px rgba(0,0,0,.04), 0 10px 28px -12px rgba(0,0,0,.16);
+    --shadow-float:0 8px 24px -6px rgba(0,0,0,.18);
+    --r-lg:20px;
+    --r-md:14px;
+    --r-sm:11px;
+  }
+  html[data-theme="dark"]{
+    --bg:#000000;
+    --card:#1C1C1E;
+    --fill:#2C2C2E;
+    --label:#F2F2F7;
+    --label2:#98989F;
+    --label3:#636366;
+    --sep:rgba(84,84,88,.6);
+    --tint-wash:rgba(201,150,71,.22);
+    --red-wash:rgba(255,59,48,.18);
+    --green-wash:rgba(48,184,85,.16);
+    --shadow-card:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -12px rgba(0,0,0,.7);
+  }
+  @media (prefers-color-scheme: dark){
+    html[data-theme="auto"]{
+      --bg:#000000;
+      --card:#1C1C1E;
+      --fill:#2C2C2E;
+      --label:#F2F2F7;
+      --label2:#98989F;
+      --label3:#636366;
+      --sep:rgba(84,84,88,.6);
+      --tint-wash:rgba(201,150,71,.22);
+      --red-wash:rgba(255,59,48,.18);
+      --green-wash:rgba(48,184,85,.16);
+      --shadow-card:0 1px 2px rgba(0,0,0,.5), 0 10px 28px -12px rgba(0,0,0,.7);
+    }
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html{ transition:background-color .25s ease; }
+  body{ transition:background-color .25s ease; }
+  .receipt, .top-bar, input, select{ transition:background-color .25s ease, color .25s ease, box-shadow .15s ease; }
+  html,body{ margin:0; padding:0; }
+  body{
+    background:var(--bg);
+    min-height:100vh;
+    font-family:-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Tajawal', sans-serif;
+    -webkit-font-smoothing:antialiased;
+    color:var(--label);
+    display:flex;
+    justify-content:center;
+    padding:max(20px, env(safe-area-inset-top)) 14px calc(32px + env(safe-area-inset-bottom));
+  }
+  #app{ width:100%; max-width:430px; }
+  .hidden{ display:none !important; }
+
+  /* ---------- Icons ---------- */
+  .icon{ width:18px; height:18px; display:inline-block; vertical-align:-4px; flex-shrink:0; }
+  .icon-sm{ width:14px; height:14px; vertical-align:-2px; }
+
+  /* ---------- Large title header ---------- */
+  .brand{ text-align:right; margin:2px 4px 18px; }
+  .logo-lockup{ display:flex; align-items:center; gap:10px; justify-content:flex-end; }
+  .brand-logo{ width:40px; height:40px; flex-shrink:0; }
+  .brand h1{
+    font-size:26px; font-weight:800; letter-spacing:-.3px; margin:0; color:var(--label);
+  }
+  .brand p{ margin:5px 0 0; color:var(--label2); font-size:13px; }
+
+  /* ---------- Card ---------- */
+  .receipt{
+    background:var(--card); color:var(--label); border-radius:var(--r-lg); position:relative;
+    padding:20px 18px; box-shadow:var(--shadow-card); margin-bottom:14px;
+  }
+  .receipt-title{ font-size:19px; font-weight:800; text-align:center; color:var(--label); margin:0 0 4px; }
+  .receipt-sub{ text-align:center; font-size:13px; color:var(--label2); margin:0 0 18px; }
+  .dashed{ border:none; border-top:1px solid var(--sep); margin:16px 0; }
+
+  label{ display:block; font-size:13px; font-weight:600; margin:0 0 7px; color:var(--label2); }
+  .field{ margin-bottom:14px; }
+  .hint{ font-size:12px; color:var(--label2); margin-top:-8px; margin-bottom:12px; line-height:1.5; }
+  .price-hint{ font-size:14px; color:var(--tint-deep); font-weight:700; margin-top:6px; min-height:17px; }
+
+  input[type=text], input[type=password], input[type=number], input[type=date], input[type=time], select{
+    width:100%; padding:13px 14px; border:none; border-radius:var(--r-sm);
+    background:var(--fill); font-family:inherit; font-size:16px; color:var(--label); outline:none;
+    transition:box-shadow .15s ease;
+    -webkit-appearance:none;
+  }
+  input:focus, select:focus{ box-shadow:0 0 0 2px var(--tint) inset; }
+  input::placeholder{ color:var(--label3); }
+
+  /* ---------- Buttons (with iOS-style press feedback) ---------- */
+  .btn, .btn-outline, .seller-pick-btn, .product-tile, .range-quick-btn,
+  .owner-mini-btn, .cashier-mini-btn, .tiny-x, .cart-qty-ctrl button{
+    transition:transform .16s cubic-bezier(.2,.9,.3,1), opacity .16s ease, background-color .16s ease;
+  }
+  .btn:active, .btn-outline:active, .seller-pick-btn:active, .product-tile:active,
+  .range-quick-btn:active, .owner-mini-btn:active, .cashier-mini-btn:active,
+  .tiny-x:active, .cart-qty-ctrl button:active{
+    transform:scale(.94); opacity:.72;
+  }
+
+  .btn{
+    display:block; width:100%; padding:15px; border:none; border-radius:var(--r-md);
+    font-family:inherit; font-weight:700; font-size:16px; cursor:pointer; text-align:center;
+  }
+  .btn-primary{ background:var(--tint); color:#fff; box-shadow:0 6px 16px -6px rgba(184,134,58,.55); }
+  .btn-ghost{ background:rgba(120,120,128,.14); color:var(--label); }
+  .btn-danger{ background:var(--red); color:#fff; }
+  .btn-small{ padding:12px; font-size:14.5px; border-radius:var(--r-sm); }
+  .btn-outline{
+    background:transparent; color:var(--tint-deep); border:1.5px solid var(--tint);
+    padding:11px; font-size:14px; border-radius:var(--r-sm); font-weight:700; cursor:pointer; width:100%;
+    font-family:inherit;
+  }
+
+  /* ---------- Period chip (replaces "stamp") ---------- */
+  .stamp{
+    display:inline-flex; align-items:center; gap:7px; border:none; border-radius:999px;
+    padding:9px 20px; font-weight:700; font-size:15px; width:auto; height:auto;
+  }
+  .stamp.morning{ background:var(--green-wash); color:#1F8A41; }
+  .stamp.shared{ background:var(--tint-wash); color:var(--tint-deep); }
+  .stamp.evening{ background:var(--red-wash); color:#D9291D; }
+  .stamp-wrap{ text-align:center; margin-bottom:16px; }
+  .stamp-note{ text-align:center; font-size:12.5px; color:var(--label2); margin-top:9px; line-height:1.5; }
+
+  /* ---------- Sale line / totals ---------- */
+  .sale-line{
+    display:flex; justify-content:space-between; align-items:flex-start;
+    font-size:13.5px; padding:10px 0; border-bottom:1px solid var(--sep);
+  }
+  .sale-line:last-child{ border-bottom:none; }
+  .sale-line .item-name{ font-weight:600; color:var(--label); }
+  .sale-line .item-meta{ color:var(--label2); font-size:11.5px; margin-top:2px; }
+  .sale-line .item-price{ font-weight:700; color:var(--green); white-space:nowrap; padding-right:8px; font-variant-numeric:tabular-nums; }
+  .total-row{
+    display:flex; justify-content:space-between; font-weight:800; font-size:19px;
+    padding-top:10px; color:var(--label); font-variant-numeric:tabular-nums;
+  }
+  .sub-row{
+    display:flex; justify-content:space-between; font-size:13px;
+    padding-top:6px; color:var(--label2); font-variant-numeric:tabular-nums;
+  }
+  .empty-note{ text-align:center; color:var(--label2); font-size:13.5px; padding:16px 0; }
+
+  .period-row{ display:flex; justify-content:space-between; align-items:center; font-size:13.5px; padding:10px 0; border-bottom:1px solid var(--sep); }
+  .period-row:last-child{ border-bottom:none; }
+  .period-tag{ font-size:11.5px; font-weight:700; padding:3px 10px; border-radius:999px; color:#fff; }
+  .tag-morning{ background:var(--green); }
+  .tag-shared{ background:var(--tint); }
+  .tag-evening{ background:var(--red); }
+  .period-nums{ text-align:left; font-variant-numeric:tabular-nums; }
+  .period-nums .money{ font-weight:700; }
+  .period-nums .pieces{ color:var(--label2); font-size:11.5px; }
+
+  .period-block{ margin-bottom:18px; }
+  .period-block:last-child{ margin-bottom:0; }
+  .period-block-head{
+    display:flex; align-items:center; justify-content:space-between; margin-bottom:10px;
+  }
+  .period-block-total{ font-size:12.5px; color:var(--label2); font-weight:700; font-variant-numeric:tabular-nums; }
+  .seller-period-group{
+    background:var(--fill); border-radius:var(--r-sm); padding:10px 12px; margin-bottom:10px;
+  }
+  .seller-period-group:last-child{ margin-bottom:0; }
+  .seller-period-head{
+    display:flex; justify-content:space-between; font-size:13.5px; font-weight:800; color:var(--label);
+    padding-bottom:8px; margin-bottom:4px; border-bottom:1px solid var(--sep); font-variant-numeric:tabular-nums;
+  }
+  .seller-period-group .sale-line{ padding:8px 0; }
+
+  .seller-block{ padding:14px 0; border-bottom:1px solid var(--sep); }
+  .seller-block:last-child{ border-bottom:none; }
+  .seller-block .seller-name{ font-weight:800; font-size:15.5px; margin-bottom:8px; display:block; }
+  .seller-stat-row{ display:flex; justify-content:space-between; font-size:13px; padding:4px 0; }
+  .seller-stat-row .lbl{ color:var(--label2); }
+  .seller-stat-row .val{ font-weight:700; font-variant-numeric:tabular-nums; }
+  .seller-stat-row.total .val{ color:var(--green); font-size:14.5px; }
+  .seller-stat-row.commission .val{ color:var(--tint-deep); }
+
+  .day-row{ display:flex; justify-content:space-between; align-items:center; font-size:13.5px; padding:11px 0; border-bottom:1px solid var(--sep); }
+  .day-row:last-child{ border-bottom:none; }
+  .day-row .day-date{ font-weight:700; color:var(--label); }
+  .day-row .day-date .day-name{ display:block; font-size:11.5px; color:var(--label2); font-weight:500; margin-top:1px; }
+  .day-nums{ text-align:left; font-variant-numeric:tabular-nums; }
+  .day-nums .money{ font-weight:700; color:var(--green); }
+  .day-nums .pieces{ color:var(--label2); font-size:11.5px; }
+
+  .range-quick-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:14px; }
+  .range-quick-btn{
+    background:var(--fill); border:none; border-radius:999px;
+    padding:8px 15px; font-size:13px; font-weight:600; cursor:pointer; font-family:inherit;
+    color:var(--label);
+  }
+  .range-quick-btn:active{ background:var(--tint-wash); color:var(--tint-deep); }
+  .range-date-row{ display:flex; gap:10px; }
+  .range-date-row .field{ flex:1; }
+  .range-result-box{
+    background:var(--fill); border-radius:var(--r-md); padding:16px; margin-top:12px;
+  }
+  .range-result-box .rr-row{ display:flex; justify-content:space-between; padding:7px 0; font-size:14px; border-bottom:1px solid var(--sep); font-variant-numeric:tabular-nums; }
+  .range-result-box .rr-row:last-child{ border-bottom:none; }
+  .range-result-box .rr-row b{ font-weight:700; }
+
+  /* ---------- Nav bar ---------- */
+  .top-bar{
+    display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;
+    padding:12px 16px; background:var(--card); border-radius:var(--r-md); box-shadow:var(--shadow-card);
+  }
+  .top-bar .who{ font-size:14px; color:var(--label2); }
+  .top-bar .who b{ color:var(--label); font-weight:800; }
+  .logout{ background:none; border:none; color:var(--red); font-size:13px; font-weight:600; cursor:pointer; font-family:inherit; }
+
+  .section-title{ font-size:16.5px; font-weight:800; color:var(--label); margin:0 0 14px; display:flex; align-items:center; gap:8px; }
+  .section-title .icon{ color:var(--tint); }
+
+  .msg{ text-align:center; font-size:13px; font-weight:600; padding:11px; border-radius:var(--r-sm); margin-bottom:12px; }
+  .msg.err{ background:var(--red-wash); color:#D9291D; }
+  .msg.ok{ background:var(--green-wash); color:#1F8A41; }
+
+  .seller-manage-row{ display:flex; align-items:center; justify-content:space-between; padding:11px 0; border-bottom:1px solid var(--sep); gap:8px; }
+  .seller-manage-row:last-child{ border-bottom:none; }
+  .seller-manage-row span{ font-size:14.5px; font-weight:600; }
+
+  .product-manage-row{ padding:12px 0; border-bottom:1px solid var(--sep); }
+  .product-manage-row:last-child{ border-bottom:none; }
+  .product-manage-top{ display:flex; align-items:center; justify-content:space-between; margin-bottom:8px; }
+  .product-manage-top span{ font-size:14.5px; font-weight:600; display:flex; align-items:center; gap:6px; }
+  .product-manage-commission label{ font-size:11px; margin-bottom:5px; }
+  .product-manage-commission input{ padding:9px 12px; font-size:14px; }
+  .special-tag{
+    display:inline-flex; align-items:center; gap:3px; background:var(--tint-wash); color:var(--tint-deep);
+    font-size:10.5px; font-weight:800; padding:2px 8px; border-radius:999px;
+  }
+
+  .seller-pick-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:10px; }
+  .seller-pick-btn{
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    background:var(--fill); border:none; border-radius:var(--r-md);
+    padding:16px 10px; cursor:pointer; font-family:inherit;
+    font-size:15px; font-weight:700; color:var(--label);
+  }
+  .seller-pick-btn:active{ background:var(--tint-wash); color:var(--tint-deep); }
+
+  .product-tiles{ display:grid; grid-template-columns:repeat(3, 1fr); gap:9px; margin-bottom:16px; }
+  .product-tile{
+    position:relative; background:var(--fill); border:none; border-radius:var(--r-md);
+    padding:15px 6px; text-align:center; cursor:pointer; font-family:inherit;
+    font-size:13.5px; font-weight:700; color:var(--label); user-select:none;
+  }
+  .product-tile.has-qty{ background:var(--tint-wash); color:var(--tint-deep); }
+  .product-tile.is-special{ box-shadow:inset 0 0 0 1.5px var(--tint); }
+  .product-tile .qty-badge{
+    position:absolute; top:-6px; left:-6px; background:var(--red); color:#fff;
+    border-radius:10px; min-width:20px; height:20px; padding:0 4px; display:flex; align-items:center; justify-content:center;
+    font-size:11px; font-weight:800; border:2px solid var(--card);
+  }
+  .product-tile .star-badge{
+    position:absolute; top:-6px; right:-6px; background:var(--tint); color:#fff;
+    width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:10px; border:2px solid var(--card);
+  }
+
+  #cart-summary{ margin-bottom:4px; }
+  .cart-line{
+    display:flex; align-items:center; justify-content:space-between; padding:9px 0; border-bottom:1px solid var(--sep);
+    font-size:14px;
+  }
+  .cart-line:last-child{ border-bottom:none; }
+  .cart-line .cart-name{ font-weight:600; }
+  .cart-line .cart-qty-ctrl{
+    display:flex; align-items:center; gap:0; background:var(--fill); border-radius:999px; overflow:hidden;
+  }
+  .cart-line .cart-qty-ctrl button{
+    width:30px; height:30px; border:none; background:transparent;
+    font-weight:800; cursor:pointer; font-size:16px; line-height:1; color:var(--tint-deep);
+  }
+  .cart-line .cart-qty-num{ font-weight:700; min-width:22px; text-align:center; font-variant-numeric:tabular-nums; }
+
+  .owner-mini-btn, .cashier-mini-btn{
+    position:absolute; top:14px; display:flex; align-items:center; gap:4px;
+    background:rgba(120,120,128,.14); color:var(--label2);
+    border:none; border-radius:999px; padding:6px 12px; font-size:11.5px; font-weight:700;
+    cursor:pointer; font-family:inherit;
+  }
+  .owner-mini-btn{ left:14px; }
+  .cashier-mini-btn{ right:14px; }
+
+  .note-box{
+    background:rgba(120,120,128,.09); border-radius:var(--r-sm); padding:12px 14px; font-size:12.5px; color:var(--label2);
+    margin-bottom:16px; line-height:1.6;
+  }
+
+  .tiny-x{
+    width:26px; height:26px; border-radius:50%; background:var(--red-wash); color:var(--red);
+    border:none; font-size:13px; font-weight:800; display:flex; align-items:center; justify-content:center; cursor:pointer;
+    flex-shrink:0;
+  }
+
+  .segmented{
+    display:flex; background:var(--fill); border-radius:var(--r-sm); padding:3px; gap:3px; margin-bottom:6px;
+  }
+  .segmented button{
+    flex:1; border:none; background:transparent; padding:9px 4px; border-radius:9px;
+    font-family:inherit; font-size:13px; font-weight:700; color:var(--label2); cursor:pointer;
+    transition:background-color .18s ease, color .18s ease, box-shadow .18s ease;
+  }
+  .segmented button.active{
+    background:var(--card); color:var(--label); box-shadow:0 1px 3px rgba(0,0,0,.15);
+  }
+</style>
+</head>
+<body>
+<svg style="display:none">
+  <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M15 3a5 5 0 0 0-4.9 6.1L3 16.2V20h3.8l1-1h2v-2h2l1-1h1.1A5 5 0 1 0 15 3z"/>
+    <circle cx="16" cy="8" r="1" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-calc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="5" y="3" width="14" height="18" rx="3"/>
+    <line x1="7.5" y1="7" x2="16.5" y2="7"/>
+    <circle cx="8" cy="12.2" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="12.2" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="12.2" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="8" cy="16.2" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="12" cy="16.2" r=".9" fill="currentColor" stroke="none"/>
+    <circle cx="16" cy="16.2" r=".9" fill="currentColor" stroke="none"/>
+  </symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M6 3h12v18l-2-1.3L14 21l-2-1.3L10 21l-2-1.3L6 21V3z"/>
+    <line x1="8.5" y1="8" x2="15.5" y2="8"/>
+    <line x1="8.5" y1="12" x2="15.5" y2="12"/>
+  </symbol>
+  <symbol id="i-box" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 8l9-5 9 5-9 5-9-5z"/>
+    <path d="M3 8v9l9 5 9-5V8"/>
+    <line x1="12" y1="13" x2="12" y2="22"/>
+  </symbol>
+  <symbol id="i-person" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="8" r="3.6"/>
+    <path d="M4.5 20c1-4 4-6 7.5-6s6.5 2 7.5 6"/>
+  </symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="6" width="18" height="13" rx="3"/>
+    <path d="M6 6V5.2A2.2 2.2 0 0 1 8.2 3h9.6"/>
+    <circle cx="16.3" cy="12.5" r=".3" fill="currentColor" stroke="none"/>
+    <path d="M16 12.5h3"/>
+  </symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="4" y="5" width="16" height="15" rx="3"/>
+    <line x1="4" y1="9.5" x2="20" y2="9.5"/>
+    <line x1="8" y1="3" x2="8" y2="7"/>
+    <line x1="16" y1="3" x2="16" y2="7"/>
+  </symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20V10M10 20V4M16 20v-7M4 20h16"/>
+  </symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3"/>
+    <path d="M12 3v2.2M12 18.8V21M21 12h-2.2M5.2 12H3M18.4 5.6l-1.5 1.5M7.1 16.9l-1.5 1.5M18.4 18.4l-1.5-1.5M7.1 7.1L5.6 5.6"/>
+  </symbol>
+  <symbol id="i-shirt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M8 4 4 7l2 3 2-1v11h8V9l2 1 2-3-4-3-2 2h-4l-2-2z"/>
+  </symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="8.5"/>
+    <path d="M12 7.5V12l3.2 2"/>
+  </symbol>
+  <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5 13l4.5 4.5L19 7"/>
+  </symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 7h16"/>
+    <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/>
+    <path d="M6 7l1 13a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2l1-13"/>
+    <path d="M10 11v6M14 11v6"/>
+  </symbol>
+  <symbol id="i-theme" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/>
+  </symbol>
+</svg>
+<div id="app">
+
+  <div class="brand">
+    <div class="logo-lockup">
+      <img class="brand-logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImtHb2xkIiB4MT0iMCIgeTE9IjAiIHgyPSI1MTIiIHkyPSI1MTIiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjRTRCMTY2Ii8+CiAgICAgIDxzdG9wIG9mZnNldD0iMC41NSIgc3RvcC1jb2xvcj0iI0I4ODYzQSIvPgogICAgICA8c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM4QTY0MjUiLz4KICAgIDwvbGluZWFyR3JhZGllbnQ+CiAgPC9kZWZzPgoKICA8IS0tIFZlcnRpY2FsIHN0ZW0gLS0+CiAgPHJlY3QgeD0iMTUwIiB5PSI5MCIgd2lkdGg9IjU4IiBoZWlnaHQ9IjMzMiIgZmlsbD0idXJsKCNrR29sZCkiLz4KCiAgPCEtLSBVcHBlciBkaWFnb25hbCBhcm0gKGZsb2F0aW5nLCBzaGFycC1jdXQgZW5kcykgLS0+CiAgPHBhdGggZD0iTTI2MiAyMzIgTDM5MiA5MCBMNDMwIDkwIEwyODggMjQ2IEwyNjIgMjQ2IFoiIGZpbGw9InVybCgja0dvbGQpIi8+CgogIDwhLS0gTG93ZXIgZGlhZ29uYWwgYXJtIChmbG9hdGluZywgc2hhcnAtY3V0IGVuZHMpIC0tPgogIDxwYXRoIGQ9Ik0yNjIgMjY2IEwyODggMjY2IEw0MzAgNDIyIEwzOTIgNDIyIFoiIGZpbGw9InVybCgja0dvbGQpIi8+CgogIDwhLS0gRmxvYXRpbmcgZGlhbW9uZCBhY2NlbnQgYnJpZGdpbmcgdGhlIGpvaW50IC0tPgogIDxyZWN0IHg9IjIyMiIgeT0iMjI2IiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHRyYW5zZm9ybT0icm90YXRlKDQ1IDI1MiAyNTYpIiBmaWxsPSIjMUMxQzFFIi8+Cjwvc3ZnPgo=" alt="شعار أزياء ابن خرميط">
+      <h1>أزياء ابن خرميط</h1>
+    </div>
+    <p>دفتر مبيعات إلكتروني للبائعين والمالك</p>
+  </div>
+
+  <!-- SCREEN: SELLER LOGIN -->
+  <div id="screen-seller-login">
+    <div class="receipt">
+      <button class="cashier-mini-btn" onclick="showScreen('screen-cashier-login')" title="دخول الكاشير"><svg class="icon icon-sm"><use href="#i-calc"/></svg> الكاشير</button>
+      <button class="owner-mini-btn" onclick="showScreen('screen-owner-login')" title="دخول المالك"><svg class="icon icon-sm"><use href="#i-key"/></svg> المالك</button>
+      <div class="receipt-title">دخول البائع</div>
+      <div class="receipt-sub">اضغط ع اسمك للدخول مباشرة</div>
+      <div id="seller-login-msg"></div>
+      <div id="seller-name-list"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: CASHIER LOGIN -->
+  <div id="screen-cashier-login" class="hidden">
+    <div class="receipt">
+      <div class="receipt-title">دخول الكاشير</div>
+      <div class="receipt-sub">أدخل اسم المستخدم وكلمة السر</div>
+      <div id="cashier-login-msg"></div>
+      <div class="field">
+        <label>اسم المستخدم</label>
+        <input type="text" id="cashier-username-input" placeholder="اسم المستخدم" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>كلمة السر</label>
+        <input type="password" id="cashier-password-input" placeholder="••••">
+      </div>
+      <button class="btn btn-primary" onclick="cashierLogin()">دخول</button>
+    </div>
+    <button class="btn btn-ghost" onclick="showScreen('screen-seller-login')">رجوع</button>
+  </div>
+
+  <!-- SCREEN: OWNER LOGIN -->
+  <div id="screen-owner-login" class="hidden">
+    <div class="receipt">
+      <div class="receipt-title">دخول المالك</div>
+      <div class="receipt-sub">أدخل كلمة سر المالك</div>
+      <div id="owner-login-msg"></div>
+      <div class="field">
+        <label>كلمة السر</label>
+        <input type="password" id="owner-password-input" placeholder="••••">
+      </div>
+      <button class="btn btn-primary" onclick="ownerLogin()">دخول</button>
+    </div>
+    <button class="btn btn-ghost" onclick="showScreen('screen-seller-login')">رجوع</button>
+  </div>
+
+
+  <!-- SCREEN: SELLER HOME -->
+  <div id="screen-seller-home" class="hidden">
+    <div class="top-bar">
+      <span class="who">مرحبا، <b id="seller-home-name"></b></span>
+      <button class="logout" onclick="logout()">تسجيل خروج</button>
+    </div>
+
+    <div class="receipt">
+      <div class="stamp-wrap">
+        <div class="stamp" id="period-stamp"></div>
+        <div class="stamp-note" id="period-note"></div>
+      </div>
+      <div class="dashed"></div>
+      <div class="section-title"><svg class="icon"><use href="#i-receipt"/></svg> عملية بيع جديدة</div>
+      <div class="note-box">اضغط ع المنتج لإضافته، واضغط عليه أكثر من مرة إذا أكثر من قطعة.</div>
+      <div id="sale-add-msg"></div>
+
+      <label>المنتجات</label>
+      <div id="product-tiles" class="product-tiles"></div>
+
+      <div id="cart-summary"></div>
+
+      <div class="dashed"></div>
+      <div class="field">
+        <label>السعر الكلي للعملية (بالآلاف)</label>
+        <input type="number" id="sale-total-price" placeholder="مثلاً: 160" inputmode="numeric" oninput="updatePriceHint()">
+        <div class="price-hint" id="sale-price-hint"></div>
+      </div>
+      <button class="btn btn-primary" onclick="addSale()">تسجيل البيع</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: CASHIER HOME -->
+  <div id="screen-cashier-home" class="hidden">
+    <div class="top-bar">
+      <span class="who">لوحة <b>الكاشير</b></span>
+      <button class="logout" onclick="logout()">تسجيل خروج</button>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-box"/></svg> عدد القطع الكلي اليوم</div>
+      <div class="total-row"><span>مجموع القطع</span><span id="cashier-grand-pieces">0</span></div>
+      <div class="sub-row"><span>مجموع نسبة البائعين الكلية</span><span id="cashier-grand-commission">0</span></div>
+      <div class="dashed"></div>
+      <div id="cashier-period-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-wallet"/></svg> قطع بنسبة مختلفة عن الافتراضي</div>
+      <div class="note-box">هذا خاص بالمنتجات المميزة اللي نسبة البائع مالتها مختلفة عن العمولة الافتراضية (<span id="cashier-default-rate">0</span> د.ع للقطعة)، مقسمة حسب كل فترة.</div>
+      <div id="cashier-special-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-person"/></svg> عدد القطع لكل بائع</div>
+      <div class="note-box">هذا عدد القطع بس، بدون مبالغ فلوس.</div>
+      <div id="cashier-seller-breakdown"></div>
+    </div>
+  </div>
+
+  <!-- SCREEN: OWNER HOME -->
+  <div id="screen-owner-home" class="hidden">
+    <div class="top-bar">
+      <span class="who">لوحة <b>مالك المحل</b></span>
+      <button class="logout" onclick="logout()">تسجيل خروج</button>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-wallet"/></svg> إجمالي اليوم</div>
+      <div class="total-row"><span>المجموع الكلي</span><span id="owner-grand-total">0</span></div>
+      <div class="sub-row"><span>عدد القطع الكلي</span><span id="owner-grand-pieces">0</span></div>
+      <div class="dashed"></div>
+      <div id="owner-period-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-calc"/></svg> نسبة البائعين حسب الفترة</div>
+      <div class="note-box">مجموع عمولة البائعين (حسب سعر كل قطعة) لكل فترة، بعيداً عن سعر البيع الفعلي.</div>
+      <div class="sub-row"><span>مجموع نسبة البائعين الكلية اليوم</span><span id="owner-grand-commission">0</span></div>
+      <div class="dashed"></div>
+      <div id="owner-commission-period-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-shirt"/></svg> قطع بنسبة مختلفة عن الافتراضي</div>
+      <div class="note-box">هذا خاص بالمنتجات المميزة اللي نسبة البائع مالتها مختلفة عن العمولة الافتراضية (<span id="owner-default-rate">0</span> د.ع للقطعة)، مقسمة حسب كل فترة.</div>
+      <div id="owner-special-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-person"/></svg> تفصيل كل بائع</div>
+      <div class="note-box">"المباشر" = اللي باعه الشخص لحاله. "حصة المشترك" = نصيبه من فترة الاشتراك مقسومة بالتساوي. العمولة تنحسب حسب سعر كل قطعة (الافتراضي، أو الخاص إذا المنتج مميز) وهي رقم توضيحي فقط وما تنخصم من سعر البيع.</div>
+      <div id="owner-seller-breakdown"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-receipt"/></svg> تفاصيل المبيعات حسب الفترة</div>
+      <div class="note-box">كل فترة، وتحتها كل بائع باع فيها وعدد قطعه، وتحته تفاصيل كل عملية (الوقت، القطع، متوسط سعر القطعة، والسعر الكلي).</div>
+      <div id="owner-sales-detail"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-calendar"/></svg> التقرير اليومي</div>
+      <div class="note-box">مجموع القطع والدخل الكلي لكل يوم سابق.</div>
+      <div id="owner-daily-report"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-chart"/></svg> جرد فترة محددة</div>
+      <div class="note-box">اختر شهر كامل بضغطة وحدة، أو حدد تاريخين لجرد أي فترة تريدها.</div>
+      <div id="range-quick-months" class="range-quick-row"></div>
+      <div class="range-date-row">
+        <div class="field">
+          <label>من تاريخ</label>
+          <input type="date" id="range-from-date">
+        </div>
+        <div class="field">
+          <label>إلى تاريخ</label>
+          <input type="date" id="range-to-date">
+        </div>
+      </div>
+      <button class="btn btn-primary btn-small" onclick="calcRangeReport()">احسب الجرد</button>
+      <div id="range-report-result"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-gear"/></svg> إدارة البائعين</div>
+      <div id="owner-seller-manage"></div>
+      <div class="dashed"></div>
+      <div class="field">
+        <label>اسم بائع جديد</label>
+        <input type="text" id="new-seller-name" placeholder="اسم البائع">
+      </div>
+      <button class="btn btn-primary btn-small" onclick="addSeller()">إضافة بائع</button>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-shirt"/></svg> إدارة المنتجات</div>
+      <div class="note-box">هذي المنتجات اللي تظهر للبائع كأزرار يضغط عليها بدل ما يكتب اسمها. تكدر تحط عمولة خاصة لأي منتج تختلف عن باقي المنتجات، وبهاي الحالة يطلع عليه علامة "★ مميز" بواجهة البائع.</div>
+      <div id="owner-product-manage"></div>
+      <div class="dashed"></div>
+      <div class="field">
+        <label>اسم منتج جديد</label>
+        <input type="text" id="new-product-name" placeholder="مثال: قميص">
+      </div>
+      <button class="btn btn-primary btn-small" onclick="addProduct()">إضافة منتج</button>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-clock"/></svg> أوقات الشفتات وقيمة القطعة</div>
+      <div class="field">
+        <label>بداية الصباحي</label>
+        <input type="time" id="cfg-morning-start">
+      </div>
+      <div class="field">
+        <label>بداية الفترة المشتركة</label>
+        <input type="time" id="cfg-shared-start">
+      </div>
+      <div class="field">
+        <label>بداية المسائي المنفرد</label>
+        <input type="time" id="cfg-evening-start">
+      </div>
+      <div class="field">
+        <label>نهاية المسائي (يوم ثاني)</label>
+        <input type="time" id="cfg-evening-end">
+      </div>
+      <div class="hint">المبيعات اللي تصير بعد نص الليل ولين وقت "نهاية المسائي" تنحسب على نفس يوم الشفت اللي بلش (مو اليوم الجديد).</div>
+      <div class="field">
+        <label>عمولة القطعة الواحدة (د.ع)</label>
+        <input type="number" id="cfg-commission" min="0">
+      </div>
+      <button class="btn btn-primary btn-small" onclick="saveShiftConfig()">حفظ</button>
+      <div id="cfg-msg"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-theme"/></svg> مظهر التطبيق</div>
+      <div class="note-box">هذا الإعداد يطبق على كل اللي يستخدمون التطبيق (البائعين والكاشير والمالك).</div>
+      <div class="segmented" id="theme-picker"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-key"/></svg> كلمة سر المالك</div>
+      <div class="field">
+        <label>كلمة سر جديدة</label>
+        <input type="password" id="new-owner-password" placeholder="اتركها فارغة إذا ما تريد تغييرها">
+      </div>
+      <button class="btn btn-primary btn-small" onclick="changeOwnerPassword()">تغيير كلمة السر</button>
+      <div id="owner-pw-msg"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-calc"/></svg> بيانات دخول الكاشير</div>
+      <div class="note-box">الكاشير حساب وحيد بس (اسم مستخدم وكلمة سر)، يشوف عدد القطع بس بدون فلوس.</div>
+      <div class="field">
+        <label>اسم المستخدم</label>
+        <input type="text" id="new-cashier-username" placeholder="اسم مستخدم الكاشير" autocomplete="off">
+      </div>
+      <div class="field">
+        <label>كلمة السر</label>
+        <input type="text" id="new-cashier-password" placeholder="كلمة سر الكاشير">
+      </div>
+      <button class="btn btn-primary btn-small" onclick="changeCashierCredentials()">حفظ بيانات الكاشير</button>
+      <div id="cashier-cred-msg"></div>
+    </div>
+
+    <div class="receipt">
+      <div class="section-title"><svg class="icon"><use href="#i-trash"/></svg> إعادة تعيين المبيعات</div>
+      <div class="note-box">هذا الإجراء يحذف كل سجلات المبيعات نهائياً ويرجع البرنامج فاضي بدون أي عملية بيع (عدد القطع والدخل يصير صفر). البائعين والمنتجات والإعدادات ما تنحذف. اكتب كلمة سر المالك للتأكيد.</div>
+      <div class="field">
+        <label>كلمة سر المالك للتأكيد</label>
+        <input type="password" id="reset-sales-password" placeholder="كلمة سر المالك">
+      </div>
+      <button class="btn btn-danger" onclick="resetAllSales()">حذف كل المبيعات نهائياً</button>
+      <div id="reset-sales-msg"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script>
+/* ====== Firebase setup — عدّل هذا القسم ببيانات مشروعك من Firebase Console ====== */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+
+/* window.storage: نفس واجهة تخزين Claude تماماً، بس مربوطة بـ Firebase Realtime Database
+   بدلاً من التخزين المحلي، حتى كل الأجهزة (المالك/الكاشير/البائعين) تشوف نفس البيانات لحظياً.
+   إذا ما انعدلت بيانات firebaseConfig أعلاه، البرنامج يشتغل بتخزين محلي مؤقت بالجهاز بس (احتياطي). */
+window.storage = (function(){
+  let fbReady = false;
+  let fbDB = null;
+  try{
+    if(typeof firebase !== 'undefined' && firebaseConfig.apiKey !== 'YOUR_API_KEY'){
+      firebase.initializeApp(firebaseConfig);
+      fbDB = firebase.database();
+      fbReady = true;
+    }else{
+      console.warn('Firebase مو معدّل بعد — البرنامج يستخدم تخزين محلي مؤقت بالجهاز بس.');
+    }
+  }catch(e){
+    console.error('فشل الاتصال بـ Firebase، رجع لتخزين محلي:', e);
+  }
+
+  function pathOf(key){ return key.replace(/:/g, '/'); }
+
+  return {
+    async get(key){
+      if(fbReady){
+        try{
+          const snap = await fbDB.ref(pathOf(key)).get();
+          return snap.exists() ? {value: snap.val()} : null;
+        }catch(e){
+          console.error('Firebase get error:', e);
+        }
+      }
+      const v = localStorage.getItem(key);
+      return v == null ? null : {value: v};
+    },
+    async set(key, value){
+      if(fbReady){
+        try{
+          await fbDB.ref(pathOf(key)).set(value);
+          return {key, value};
+        }catch(e){
+          console.error('Firebase set error:', e);
+        }
+      }
+      localStorage.setItem(key, value);
+      return {key, value};
+    }
+  };
+})();
+</script>
+<script>
+/* ========================= STATE ========================= */
+let sellers = [];
+let products = [];
+let ownerPassword = '1234';
+let cashierUsername = 'كاشير';
+let cashierPassword = '0000';
+let shiftConfig = { morningStart: '08:00', sharedStart: '13:00', eveningStart: '20:00', eveningEnd: '03:00' };
+let commissionPerPiece = 750;
+let theme = 'light';
+let sales = [];
+let currentUser = null;
+let itemRowCount = 0;
+let currentCart = {};
+
+const CONFIG_KEY = 'shop:config';
+const SALES_KEY = 'shop:sales';
+
+/* ========================= STORAGE ========================= */
+async function loadAll(){
+  let loaded = false;
+  try{
+    const cfgRes = await window.storage.get(CONFIG_KEY, true);
+    if(cfgRes && cfgRes.value){
+      const cfg = JSON.parse(cfgRes.value);
+      sellers = cfg.sellers || [];
+      products = cfg.products || [];
+      ownerPassword = cfg.ownerPassword || '1234';
+      cashierUsername = cfg.cashierUsername || 'كاشير';
+      cashierPassword = cfg.cashierPassword || '0000';
+      shiftConfig = normalizeShiftConfig(cfg.shiftConfig) || shiftConfig;
+      commissionPerPiece = (cfg.commissionPerPiece !== undefined) ? cfg.commissionPerPiece : 750;
+      theme = cfg.theme || 'light';
+      loaded = true;
+    }
+  }catch(e){}
+  applyTheme(theme);
+  if(!loaded || !sellers || sellers.length === 0){
+    sellers = [
+      {id:'s1', name:'أحمد'},
+      {id:'s2', name:'حسين'}
+    ];
+    await saveConfig();
+  }
+  if(!products || products.length === 0){
+    products = [
+      {id:'p1', name:'قميص', commission:null},
+      {id:'p2', name:'بنطرون', commission:null},
+      {id:'p3', name:'تيشيرت', commission:null},
+      {id:'p4', name:'جاكيت', commission:null},
+      {id:'p5', name:'فستان', commission:null},
+      {id:'p6', name:'دشداشة', commission:null}
+    ];
+    await saveConfig();
+  }
+  try{
+    const salesRes = await window.storage.get(SALES_KEY, true);
+    sales = salesRes && salesRes.value ? JSON.parse(salesRes.value) : [];
+  }catch(e){
+    sales = [];
+  }
+}
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme', t);
+}
+
+async function setTheme(t){
+  theme = t;
+  applyTheme(t);
+  await saveConfig();
+  renderThemePicker();
+}
+
+function renderThemePicker(){
+  const box = document.getElementById('theme-picker');
+  if(!box) return;
+  const opts = [
+    {key:'light', label:'فاتح'},
+    {key:'dark', label:'داكن'},
+    {key:'auto', label:'تلقائي'}
+  ];
+  box.innerHTML = opts.map(o =>
+    `<button type="button" class="${theme===o.key?'active':''}" onclick="setTheme('${o.key}')">${o.label}</button>`
+  ).join('');
+}
+
+async function saveConfig(){
+  await window.storage.set(CONFIG_KEY, JSON.stringify({sellers, products, ownerPassword, cashierUsername, cashierPassword, shiftConfig, commissionPerPiece, theme}), true);
+}
+async function saveSales(){
+  await window.storage.set(SALES_KEY, JSON.stringify(sales), true);
+}
+
+/* ========================= NAV ========================= */
+function showScreen(id){
+  document.querySelectorAll('#app > div[id^="screen-"]').forEach(el => el.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+function logout(){ currentUser = null; showScreen('screen-seller-login'); }
+
+/* ========================= SELLER LOGIN ========================= */
+function fillSellerSelect(){
+  const list = document.getElementById('seller-name-list');
+  if(!list) return;
+  if(sellers.length === 0){
+    list.innerHTML = '<div class="empty-note">ماكو بائعين مسجلين، خل المالك يضيفهم</div>';
+    return;
+  }
+  list.innerHTML = `<div class="seller-pick-grid">${sellers.map(s => `
+    <button type="button" class="seller-pick-btn" onclick="selectSeller('${s.id}')">${escapeHtml(s.name)}</button>
+  `).join('')}</div>`;
+}
+
+function selectSeller(id){
+  const seller = sellers.find(s => s.id === id);
+  if(!seller) return;
+  currentUser = {type:'seller', id: seller.id, name: seller.name};
+  resetSaleForm();
+  renderSellerHome();
+  showScreen('screen-seller-home');
+}
+
+/* ========================= OWNER LOGIN ========================= */
+async function ownerLogin(){
+  const pw = document.getElementById('owner-password-input').value;
+  const msg = document.getElementById('owner-login-msg');
+  if(pw !== ownerPassword){
+    msg.innerHTML = '<div class="msg err">كلمة سر المالك غلط</div>';
+    return;
+  }
+  msg.innerHTML = '';
+  document.getElementById('owner-password-input').value = '';
+  currentUser = {type:'owner'};
+  renderOwnerHome();
+  showScreen('screen-owner-home');
+}
+
+async function changeOwnerPassword(){
+  const val = document.getElementById('new-owner-password').value.trim();
+  const msg = document.getElementById('owner-pw-msg');
+  if(!val){
+    msg.innerHTML = '<div class="msg err">اكتب كلمة سر جديدة</div>';
+    return;
+  }
+  ownerPassword = val;
+  await saveConfig();
+  document.getElementById('new-owner-password').value = '';
+  msg.innerHTML = '<div class="msg ok">تغيرت كلمة سر المالك ✔</div>';
+  setTimeout(()=>{ msg.innerHTML=''; }, 2000);
+}
+
+/* ========================= CASHIER LOGIN ========================= */
+async function cashierLogin(){
+  const user = document.getElementById('cashier-username-input').value.trim();
+  const pw = document.getElementById('cashier-password-input').value;
+  const msg = document.getElementById('cashier-login-msg');
+  if(user !== cashierUsername || pw !== cashierPassword){
+    msg.innerHTML = '<div class="msg err">اسم المستخدم أو كلمة السر غلط</div>';
+    return;
+  }
+  msg.innerHTML = '';
+  document.getElementById('cashier-password-input').value = '';
+  currentUser = {type:'cashier'};
+  renderCashierHome();
+  showScreen('screen-cashier-home');
+}
+
+async function changeCashierCredentials(){
+  const userEl = document.getElementById('new-cashier-username');
+  const pwEl = document.getElementById('new-cashier-password');
+  const user = userEl.value.trim();
+  const pw = pwEl.value.trim();
+  const msg = document.getElementById('cashier-cred-msg');
+  if(!user || !pw){
+    msg.innerHTML = '<div class="msg err">اكتب اسم المستخدم وكلمة السر</div>';
+    return;
+  }
+  cashierUsername = user;
+  cashierPassword = pw;
+  await saveConfig();
+  userEl.value=''; pwEl.value='';
+  msg.innerHTML = '<div class="msg ok">تحفظت بيانات الكاشير ✔</div>';
+  setTimeout(()=>{ msg.innerHTML=''; }, 2000);
+}
+
+async function resetAllSales(){
+  const pwEl = document.getElementById('reset-sales-password');
+  const pw = pwEl.value;
+  const msg = document.getElementById('reset-sales-msg');
+
+  if(!pw){
+    msg.innerHTML = '<div class="msg err">اكتب كلمة سر المالك للتأكيد</div>';
+    return;
+  }
+  if(pw !== ownerPassword){
+    msg.innerHTML = '<div class="msg err">كلمة السر غلط</div>';
+    return;
+  }
+
+  sales = [];
+  try{
+    await window.storage.set(SALES_KEY, JSON.stringify(sales), true);
+  }catch(e){
+    msg.innerHTML = '<div class="msg err">صار خطأ بالحفظ، حاول مرة ثانية</div>';
+    return;
+  }
+  pwEl.value = '';
+  msg.innerHTML = '<div class="msg ok">تحذفت كل المبيعات، البرنامج رجع فاضي ✔</div>';
+  renderOwnerHome();
+}
+
+/* ========================= PERIOD LOGIC ========================= */
+function normalizeShiftConfig(cfg){
+  if(!cfg) return null;
+  const toHHMM = v => {
+    if(typeof v === 'number') return String(v).padStart(2,'0') + ':00';
+    if(typeof v === 'string' && /^\d{1,2}:\d{2}$/.test(v)) return v;
+    return null;
+  };
+  const morningStart = toHHMM(cfg.morningStart) || '08:00';
+  const sharedStart = toHHMM(cfg.sharedStart) || '13:00';
+  const eveningStart = toHHMM(cfg.eveningStart) || '20:00';
+  const eveningEnd = toHHMM(cfg.eveningEnd) || '03:00';
+  return { morningStart, sharedStart, eveningStart, eveningEnd };
+}
+
+function toMinutes(hhmm){
+  const [h, m] = hhmm.split(':').map(Number);
+  return h * 60 + m;
+}
+
+function getPeriod(date){
+  const m = date.getHours() * 60 + date.getMinutes();
+  const morningM = toMinutes(shiftConfig.morningStart);
+  const sharedM = toMinutes(shiftConfig.sharedStart);
+  const eveningM = toMinutes(shiftConfig.eveningStart);
+  const eveningEndM = toMinutes(shiftConfig.eveningEnd);
+
+  const eveningWraps = eveningEndM <= eveningM;
+  const inEvening = eveningWraps
+    ? (m >= eveningM || m < eveningEndM)
+    : (m >= eveningM && m < eveningEndM);
+
+  if(inEvening) return 'evening';
+  if(m >= sharedM && m < eveningM) return 'shared';
+  if(m >= morningM && m < sharedM) return 'morning';
+  return 'morning';
+}
+
+// The "business date" a timestamp belongs to: if it falls in the evening
+// shift's after-midnight tail (before eveningEnd), it still counts toward
+// the previous calendar day (the day the evening shift actually started).
+function getBusinessDate(date){
+  const m = date.getHours() * 60 + date.getMinutes();
+  const eveningM = toMinutes(shiftConfig.eveningStart);
+  const eveningEndM = toMinutes(shiftConfig.eveningEnd);
+  const eveningWraps = eveningEndM <= eveningM;
+  if(eveningWraps && m < eveningEndM){
+    const prev = new Date(date);
+    prev.setDate(prev.getDate() - 1);
+    return prev;
+  }
+  return date;
+}
+
+function businessDateKey(ts){
+  const bd = getBusinessDate(new Date(ts));
+  return bd.getFullYear() + '-' + String(bd.getMonth()+1).padStart(2,'0') + '-' + String(bd.getDate()).padStart(2,'0');
+}
+
+function periodLabel(p){ return p === 'morning' ? 'صباحي' : (p === 'shared' ? 'مشترك' : 'مسائي'); }
+function isToday(ts){ return businessDateKey(ts) === businessDateKey(new Date()); }
+function todaySales(){ return sales.filter(s => isToday(s.ts)); }
+function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+
+/* ========================= ITEM ROWS (sale form) ========================= */
+function resetSaleForm(){
+  currentCart = {};
+  document.getElementById('sale-total-price').value = '';
+  const hint = document.getElementById('sale-price-hint');
+  if(hint) hint.textContent = '';
+  renderProductTiles();
+  renderCartSummary();
+}
+
+function updatePriceHint(){
+  const val = parseFloat(document.getElementById('sale-total-price').value);
+  const hint = document.getElementById('sale-price-hint');
+  if(!isNaN(val) && val > 0){
+    hint.textContent = '= ' + fmt(val * 1000) + ' د.ع';
+  }else{
+    hint.textContent = '';
+  }
+}
+
+function renderProductTiles(){
+  const wrap = document.getElementById('product-tiles');
+  if(!wrap) return;
+  if(products.length === 0){
+    wrap.innerHTML = '<div class="empty-note">ماكو منتجات مضافة، خل المالك يضيفها</div>';
+    return;
+  }
+  wrap.innerHTML = products.map(p => {
+    const qty = currentCart[p.id] || 0;
+    const isSpecial = p.commission != null;
+    return `
+      <div class="product-tile ${qty>0?'has-qty':''} ${isSpecial?'is-special':''}" onclick="addToCart('${p.id}')">
+        ${qty>0 ? `<span class="qty-badge">${qty}</span>` : ''}
+        ${isSpecial ? `<span class="star-badge">★</span>` : ''}
+        ${escapeHtml(p.name)}
+      </div>`;
+  }).join('');
+}
+
+function addToCart(id){
+  currentCart[id] = (currentCart[id] || 0) + 1;
+  renderProductTiles();
+  renderCartSummary();
+}
+
+function changeCartQty(id, delta){
+  const newQty = (currentCart[id] || 0) + delta;
+  if(newQty <= 0){
+    delete currentCart[id];
+  }else{
+    currentCart[id] = newQty;
+  }
+  renderProductTiles();
+  renderCartSummary();
+}
+
+function renderCartSummary(){
+  const box = document.getElementById('cart-summary');
+  const ids = Object.keys(currentCart).filter(id => currentCart[id] > 0);
+  if(ids.length === 0){
+    box.innerHTML = '';
+    return;
+  }
+  box.innerHTML = ids.map(id => {
+    const p = products.find(pr => pr.id === id);
+    const name = p ? p.name : 'منتج محذوف';
+    const qty = currentCart[id];
+    return `
+      <div class="cart-line">
+        <span class="cart-name">${escapeHtml(name)}</span>
+        <span class="cart-qty-ctrl">
+          <button type="button" onclick="changeCartQty('${id}', -1)">−</button>
+          <span class="cart-qty-num">${qty}</span>
+          <button type="button" onclick="changeCartQty('${id}', 1)">+</button>
+        </span>
+      </div>`;
+  }).join('');
+}
+
+function collectItems(){
+  const items = [];
+  Object.keys(currentCart).forEach(id => {
+    const qty = currentCart[id];
+    if(qty > 0){
+      const p = products.find(pr => pr.id === id);
+      items.push({ name: p ? p.name : 'منتج محذوف', qty, productId: id });
+    }
+  });
+  return items;
+}
+
+/* ========================= SELLER HOME ========================= */
+function renderSellerHome(){
+  document.getElementById('seller-home-name').textContent = currentUser.name;
+
+  const now = new Date();
+  const p = getPeriod(now);
+  const stamp = document.getElementById('period-stamp');
+  stamp.className = 'stamp ' + p;
+  stamp.textContent = periodLabel(p);
+  const note = document.getElementById('period-note');
+  const notes = {
+    morning: 'مبيعاتك الحين تنحسب إلك وحدك',
+    shared: 'إحنا بفترة مشتركة — البيع والقطع تنقسم بالتساوي بين كل البائعين النشطين اليوم',
+    evening: 'مبيعاتك الحين تنحسب إلك وحدك'
+  };
+  note.textContent = notes[p];
+
+  renderProductTiles();
+  renderCartSummary();
+}
+
+async function addSale(){
+  const msg = document.getElementById('sale-add-msg');
+  const items = collectItems();
+  const enteredPrice = parseFloat(document.getElementById('sale-total-price').value);
+
+  if(items.length === 0){
+    msg.innerHTML = '<div class="msg err">اضغط ع منتج وحد على الأقل</div>';
+    return;
+  }
+  if(isNaN(enteredPrice) || enteredPrice <= 0){
+    msg.innerHTML = '<div class="msg err">اكتب السعر الكلي للعملية</div>';
+    return;
+  }
+
+  const totalPrice = enteredPrice * 1000;
+  const pieceCount = items.reduce((a,it)=>a+it.qty, 0);
+  const now = new Date();
+  sales.push({
+    id: 'sale_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
+    sellerId: currentUser.id,
+    sellerName: currentUser.name,
+    items,
+    pieceCount,
+    totalPrice,
+    ts: now.toISOString(),
+    period: getPeriod(now)
+  });
+
+  try{
+    await saveSales();
+    msg.innerHTML = '<div class="msg ok">تسجلت العملية ✔</div>';
+  }catch(e){
+    msg.innerHTML = '<div class="msg err">صار خطأ بالحفظ، حاول مرة ثانية</div>';
+  }
+
+  resetSaleForm();
+  renderSellerHome();
+  setTimeout(()=>{ msg.innerHTML=''; }, 2500);
+}
+
+/* ========================= CASHIER HOME ========================= */
+function renderCashierHome(){
+  const today = todaySales();
+  const cb = computeCommissionBreakdown(today);
+
+  const grandPieces = cb.byPeriod.morning.pieces + cb.byPeriod.shared.pieces + cb.byPeriod.evening.pieces;
+  const grandCommission = cb.byPeriod.morning.commission + cb.byPeriod.shared.commission + cb.byPeriod.evening.commission;
+
+  document.getElementById('cashier-grand-pieces').textContent = grandPieces;
+  document.getElementById('cashier-grand-commission').textContent = fmt(grandCommission) + ' د.ع';
+  document.getElementById('cashier-default-rate').textContent = fmt(commissionPerPiece);
+
+  document.getElementById('cashier-period-breakdown').innerHTML = `
+    <div class="period-row"><span class="period-tag tag-morning">صباحي</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.morning.commission)} د.ع</div><div class="pieces">${cb.byPeriod.morning.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-shared">مشترك</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.shared.commission)} د.ع</div><div class="pieces">${cb.byPeriod.shared.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-evening">مسائي</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.evening.commission)} د.ع</div><div class="pieces">${cb.byPeriod.evening.pieces} قطعة</div></span></div>
+  `;
+
+  const specialBox = document.getElementById('cashier-special-breakdown');
+  const specialTotalPieces = cb.special.morning.pieces + cb.special.shared.pieces + cb.special.evening.pieces;
+  if(specialTotalPieces === 0){
+    specialBox.innerHTML = '<div class="empty-note">كل القطع المباعة اليوم بنفس العمولة الافتراضية</div>';
+  }else{
+    specialBox.innerHTML = `
+      <div class="period-row"><span class="period-tag tag-morning">صباحي</span><span class="period-nums"><div class="money">${fmt(cb.special.morning.commission)} د.ع</div><div class="pieces">${cb.special.morning.pieces} قطعة</div></span></div>
+      <div class="period-row"><span class="period-tag tag-shared">مشترك</span><span class="period-nums"><div class="money">${fmt(cb.special.shared.commission)} د.ع</div><div class="pieces">${cb.special.shared.pieces} قطعة</div></span></div>
+      <div class="period-row"><span class="period-tag tag-evening">مسائي</span><span class="period-nums"><div class="money">${fmt(cb.special.evening.commission)} د.ع</div><div class="pieces">${cb.special.evening.pieces} قطعة</div></span></div>
+    `;
+  }
+
+  const activeIds = [...new Set(today.map(s=>s.sellerId))];
+  const sharedPiecesShare = activeIds.length > 0 ? cb.byPeriod.shared.pieces / activeIds.length : 0;
+
+  const directPiecesBySeller = {};
+  today.filter(s=>s.period!=='shared').forEach(s=>{
+    directPiecesBySeller[s.sellerId] = (directPiecesBySeller[s.sellerId] || 0) + s.pieceCount;
+  });
+
+  const breakdown = document.getElementById('cashier-seller-breakdown');
+  if(activeIds.length === 0){
+    breakdown.innerHTML = '<div class="empty-note">ماكو مبيعات اليوم لحد الحين</div>';
+  }else{
+    breakdown.innerHTML = activeIds.map(id=>{
+      const seller = sellers.find(s=>s.id===id);
+      const name = seller ? seller.name : (today.find(s=>s.sellerId===id)?.sellerName || 'بائع محذوف');
+      const direct = directPiecesBySeller[id] || 0;
+      const totalPieces = direct + sharedPiecesShare;
+      return `
+        <div class="seller-block">
+          <span class="seller-name">${escapeHtml(name)}</span>
+          <div class="seller-stat-row total"><span class="lbl">إجمالي عدد القطع</span><span class="val">${totalPieces.toFixed(1)} قطعة</span></div>
+        </div>`;
+    }).join('');
+  }
+}
+
+/* ========================= OWNER HOME ========================= */
+function getProductCommissionRate(item){
+  let product = null;
+  if(item.productId) product = products.find(p => p.id === item.productId);
+  if(!product) product = products.find(p => p.name === item.name);
+  if(product && product.commission != null && !isNaN(product.commission)) return product.commission;
+  return commissionPerPiece;
+}
+
+function saleCommission(sale){
+  return sale.items.reduce((a, it) => a + it.qty * getProductCommissionRate(it), 0);
+}
+
+// Shared by cashier + owner: per-period piece/commission totals, plus a
+// separate per-period bucket for pieces whose product commission differs from the default rate.
+function computeCommissionBreakdown(salesList){
+  const byPeriod = {
+    morning: {pieces:0, commission:0},
+    shared: {pieces:0, commission:0},
+    evening: {pieces:0, commission:0}
+  };
+  const special = {
+    morning: {pieces:0, commission:0},
+    shared: {pieces:0, commission:0},
+    evening: {pieces:0, commission:0}
+  };
+
+  salesList.forEach(s=>{
+    s.items.forEach(it=>{
+      const rate = getProductCommissionRate(it);
+      const comm = it.qty * rate;
+      byPeriod[s.period].pieces += it.qty;
+      byPeriod[s.period].commission += comm;
+      if(rate !== commissionPerPiece){
+        special[s.period].pieces += it.qty;
+        special[s.period].commission += comm;
+      }
+    });
+  });
+
+  return { byPeriod, special };
+}
+
+function renderOwnerHome(){
+  const today = todaySales();
+
+  const byPeriod = { morning: {money:0, pieces:0}, shared: {money:0, pieces:0}, evening: {money:0, pieces:0} };
+  today.forEach(s=>{
+    byPeriod[s.period].money += s.totalPrice;
+    byPeriod[s.period].pieces += s.pieceCount;
+  });
+  const grandMoney = byPeriod.morning.money + byPeriod.shared.money + byPeriod.evening.money;
+  const grandPieces = byPeriod.morning.pieces + byPeriod.shared.pieces + byPeriod.evening.pieces;
+
+  document.getElementById('owner-grand-total').textContent = fmt(grandMoney);
+  document.getElementById('owner-grand-pieces').textContent = grandPieces;
+
+  document.getElementById('owner-period-breakdown').innerHTML = `
+    <div class="period-row"><span class="period-tag tag-morning">صباحي</span><span class="period-nums"><div class="money">${fmt(byPeriod.morning.money)} د.ع</div><div class="pieces">${byPeriod.morning.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-shared">مشترك</span><span class="period-nums"><div class="money">${fmt(byPeriod.shared.money)} د.ع</div><div class="pieces">${byPeriod.shared.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-evening">مسائي</span><span class="period-nums"><div class="money">${fmt(byPeriod.evening.money)} د.ع</div><div class="pieces">${byPeriod.evening.pieces} قطعة</div></span></div>
+  `;
+
+  const cb = computeCommissionBreakdown(today);
+  const grandCommission = cb.byPeriod.morning.commission + cb.byPeriod.shared.commission + cb.byPeriod.evening.commission;
+  document.getElementById('owner-grand-commission').textContent = fmt(grandCommission) + ' د.ع';
+  document.getElementById('owner-default-rate').textContent = fmt(commissionPerPiece);
+
+  document.getElementById('owner-commission-period-breakdown').innerHTML = `
+    <div class="period-row"><span class="period-tag tag-morning">صباحي</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.morning.commission)} د.ع</div><div class="pieces">${cb.byPeriod.morning.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-shared">مشترك</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.shared.commission)} د.ع</div><div class="pieces">${cb.byPeriod.shared.pieces} قطعة</div></span></div>
+    <div class="period-row"><span class="period-tag tag-evening">مسائي</span><span class="period-nums"><div class="money">${fmt(cb.byPeriod.evening.commission)} د.ع</div><div class="pieces">${cb.byPeriod.evening.pieces} قطعة</div></span></div>
+  `;
+
+  const ownerSpecialBox = document.getElementById('owner-special-breakdown');
+  const ownerSpecialTotalPieces = cb.special.morning.pieces + cb.special.shared.pieces + cb.special.evening.pieces;
+  if(ownerSpecialTotalPieces === 0){
+    ownerSpecialBox.innerHTML = '<div class="empty-note">كل القطع المباعة اليوم بنفس العمولة الافتراضية</div>';
+  }else{
+    ownerSpecialBox.innerHTML = `
+      <div class="period-row"><span class="period-tag tag-morning">صباحي</span><span class="period-nums"><div class="money">${fmt(cb.special.morning.commission)} د.ع</div><div class="pieces">${cb.special.morning.pieces} قطعة</div></span></div>
+      <div class="period-row"><span class="period-tag tag-shared">مشترك</span><span class="period-nums"><div class="money">${fmt(cb.special.shared.commission)} د.ع</div><div class="pieces">${cb.special.shared.pieces} قطعة</div></span></div>
+      <div class="period-row"><span class="period-tag tag-evening">مسائي</span><span class="period-nums"><div class="money">${fmt(cb.special.evening.commission)} د.ع</div><div class="pieces">${cb.special.evening.pieces} قطعة</div></span></div>
+    `;
+  }
+
+  const activeIds = [...new Set(today.map(s=>s.sellerId))];
+  const sharedMoneyShare = activeIds.length > 0 ? byPeriod.shared.money / activeIds.length : 0;
+  const sharedPiecesShare = activeIds.length > 0 ? byPeriod.shared.pieces / activeIds.length : 0;
+
+  const directBySeller = {};
+  today.filter(s=>s.period!=='shared').forEach(s=>{
+    if(!directBySeller[s.sellerId]) directBySeller[s.sellerId] = {money:0, pieces:0, commission:0};
+    directBySeller[s.sellerId].money += s.totalPrice;
+    directBySeller[s.sellerId].pieces += s.pieceCount;
+    directBySeller[s.sellerId].commission += saleCommission(s);
+  });
+
+  const sharedCommissionTotal = today.filter(s=>s.period==='shared').reduce((a,s)=>a+saleCommission(s), 0);
+  const sharedCommissionShare = activeIds.length > 0 ? sharedCommissionTotal / activeIds.length : 0;
+
+  const breakdown = document.getElementById('owner-seller-breakdown');
+  if(activeIds.length === 0){
+    breakdown.innerHTML = '<div class="empty-note">ماكو مبيعات اليوم لحد الحين</div>';
+  }else{
+    breakdown.innerHTML = activeIds.map(id=>{
+      const seller = sellers.find(s=>s.id===id);
+      const name = seller ? seller.name : (today.find(s=>s.sellerId===id)?.sellerName || 'بائع محذوف');
+      const direct = directBySeller[id] || {money:0, pieces:0, commission:0};
+      const totalMoney = direct.money + sharedMoneyShare;
+      const totalPieces = direct.pieces + sharedPiecesShare;
+      const commission = direct.commission + sharedCommissionShare;
+      return `
+        <div class="seller-block">
+          <span class="seller-name">${escapeHtml(name)}</span>
+          <div class="seller-stat-row"><span class="lbl">مباشر</span><span class="val">${fmt(direct.money)} د.ع · ${direct.pieces} قطعة</span></div>
+          <div class="seller-stat-row"><span class="lbl">حصة المشترك</span><span class="val">${fmt(sharedMoneyShare)} د.ع · ${sharedPiecesShare.toFixed(1)} قطعة</span></div>
+          <div class="seller-stat-row total"><span class="lbl">الإجمالي</span><span class="val">${fmt(totalMoney)} د.ع · ${totalPieces.toFixed(1)} قطعة</span></div>
+          <div class="seller-stat-row commission"><span class="lbl">عمولته (حسب سعر كل منتج)</span><span class="val">${fmt(commission)} د.ع</span></div>
+        </div>`;
+    }).join('');
+  }
+
+  const detailBox = document.getElementById('owner-sales-detail');
+  if(today.length === 0){
+    detailBox.innerHTML = '<div class="empty-note">ماكو عمليات بيع اليوم</div>';
+  }else{
+    const periodsOrder = ['morning','shared','evening'];
+    let html = '';
+    periodsOrder.forEach(p=>{
+      const periodSales = today.filter(s=>s.period===p);
+      if(periodSales.length === 0) return;
+
+      const bySeller = {};
+      periodSales.forEach(s=>{
+        if(!bySeller[s.sellerId]) bySeller[s.sellerId] = { name: s.sellerName, pieces:0, sales:[] };
+        bySeller[s.sellerId].pieces += s.pieceCount;
+        bySeller[s.sellerId].sales.push(s);
+      });
+
+      const periodPieces = periodSales.reduce((a,s)=>a+s.pieceCount, 0);
+
+      html += `
+        <div class="period-block">
+          <div class="period-block-head">
+            <span class="period-tag tag-${p}">${periodLabel(p)}</span>
+            <span class="period-block-total">${periodPieces} قطعة</span>
+          </div>`;
+
+      Object.values(bySeller).forEach(sd=>{
+        html += `
+          <div class="seller-period-group">
+            <div class="seller-period-head"><span>${escapeHtml(sd.name)}</span><span>${sd.pieces} قطعة</span></div>
+            ${sd.sales.slice().reverse().map(s=>{
+              const itemNames = s.items.map(it => it.qty > 1 ? `${it.name}×${it.qty}` : it.name).join('، ');
+              const avgPiecePrice = s.pieceCount > 0 ? s.totalPrice / s.pieceCount : 0;
+              const time = new Date(s.ts).toLocaleTimeString('ar-IQ',{hour:'2-digit',minute:'2-digit'});
+              return `
+                <div class="sale-line">
+                  <div>
+                    <div class="item-name">${escapeHtml(itemNames)}</div>
+                    <div class="item-meta">${time} · ${s.pieceCount} قطعة · متوسط ${fmt(avgPiecePrice)} د.ع للقطعة</div>
+                  </div>
+                  <div class="item-price">${fmt(s.totalPrice)}</div>
+                </div>`;
+            }).join('')}
+          </div>`;
+      });
+
+      html += `</div>`;
+    });
+    detailBox.innerHTML = html;
+  }
+
+  renderSellerManageList();
+  renderProductManageList();
+  renderDailyReport();
+  renderRangeQuickMonths();
+  renderThemePicker();
+
+  document.getElementById('cfg-morning-start').value = shiftConfig.morningStart;
+  document.getElementById('cfg-shared-start').value = shiftConfig.sharedStart;
+  document.getElementById('cfg-evening-start').value = shiftConfig.eveningStart;
+  document.getElementById('cfg-evening-end').value = shiftConfig.eveningEnd;
+  document.getElementById('cfg-commission').value = commissionPerPiece;
+}
+
+function renderDailyReport(){
+  const box = document.getElementById('owner-daily-report');
+  if(!box) return;
+
+  const byDay = {};
+  sales.forEach(s=>{
+    const bd = getBusinessDate(new Date(s.ts));
+    const key = bd.getFullYear() + '-' + String(bd.getMonth()+1).padStart(2,'0') + '-' + String(bd.getDate()).padStart(2,'0');
+    if(!byDay[key]) byDay[key] = { date: bd, money:0, pieces:0 };
+    byDay[key].money += s.totalPrice;
+    byDay[key].pieces += s.pieceCount;
+  });
+
+  const keys = Object.keys(byDay).sort().reverse();
+  if(keys.length === 0){
+    box.innerHTML = '<div class="empty-note">ماكو بيانات مبيعات لحد الحين</div>';
+    return;
+  }
+
+  box.innerHTML = keys.map(k=>{
+    const day = byDay[k];
+    const dateStr = day.date.toLocaleDateString('ar-IQ', {day:'numeric', month:'long', year:'numeric'});
+    const dayName = day.date.toLocaleDateString('ar-IQ', {weekday:'long'});
+    return `
+      <div class="day-row">
+        <span class="day-date">${dateStr}<span class="day-name">${dayName}</span></span>
+        <span class="day-nums"><div class="money">${fmt(day.money)} د.ع</div><div class="pieces">${day.pieces} قطعة</div></span>
+      </div>`;
+  }).join('');
+}
+
+/* ========================= RANGE / MONTHLY REPORT ========================= */
+function ymd(d){
+  return d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+}
+
+function renderRangeQuickMonths(){
+  const box = document.getElementById('range-quick-months');
+  if(!box) return;
+
+  const monthsSet = new Set();
+  sales.forEach(s=>{
+    const d = new Date(s.ts);
+    monthsSet.add(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0'));
+  });
+  const now = new Date();
+  monthsSet.add(now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0'));
+
+  const months = [...monthsSet].sort().reverse();
+  box.innerHTML = months.map(m=>{
+    const [y, mo] = m.split('-').map(Number);
+    const label = new Date(y, mo-1, 1).toLocaleDateString('ar-IQ', {month:'long', year:'numeric'});
+    return `<button type="button" class="range-quick-btn" onclick="pickMonth(${y},${mo})">${label}</button>`;
+  }).join('');
+}
+
+function pickMonth(y, mo){
+  const from = new Date(y, mo-1, 1);
+  const to = new Date(y, mo, 0);
+  document.getElementById('range-from-date').value = ymd(from);
+  document.getElementById('range-to-date').value = ymd(to);
+  calcRangeReport();
+}
+
+function calcRangeReport(){
+  const fromVal = document.getElementById('range-from-date').value;
+  const toVal = document.getElementById('range-to-date').value;
+  const result = document.getElementById('range-report-result');
+
+  if(!fromVal || !toVal){
+    result.innerHTML = '<div class="msg err">حدد تاريخ البداية والنهاية</div>';
+    return;
+  }
+
+  const from = new Date(fromVal + 'T00:00:00');
+  const to = new Date(toVal + 'T23:59:59');
+
+  if(from > to){
+    result.innerHTML = '<div class="msg err">تاريخ البداية لازم يكون قبل تاريخ النهاية</div>';
+    return;
+  }
+
+  const inRange = sales.filter(s=>{
+    const key = businessDateKey(s.ts);
+    return key >= fromVal && key <= toVal;
+  });
+
+  const totalMoney = inRange.reduce((a,s)=>a+s.totalPrice, 0);
+  const totalPieces = inRange.reduce((a,s)=>a+s.pieceCount, 0);
+  const opsCount = inRange.length;
+
+  const fromLabel = from.toLocaleDateString('ar-IQ', {day:'numeric', month:'long', year:'numeric'});
+  const toLabel = to.toLocaleDateString('ar-IQ', {day:'numeric', month:'long', year:'numeric'});
+
+  result.innerHTML = `
+    <div class="range-result-box">
+      <div class="rr-row"><span>الفترة</span><b>${fromLabel} — ${toLabel}</b></div>
+      <div class="rr-row"><span>عدد العمليات</span><b>${opsCount}</b></div>
+      <div class="rr-row"><span>عدد القطع المباعة</span><b>${totalPieces}</b></div>
+      <div class="rr-row"><span>مجموع الدخل الكلي</span><b>${fmt(totalMoney)} د.ع</b></div>
+    </div>`;
+}
+
+function renderSellerManageList(){
+  const box = document.getElementById('owner-seller-manage');
+  if(sellers.length === 0){
+    box.innerHTML = '<div class="empty-note">ماكو بائعين مسجلين</div>';
+    return;
+  }
+  box.innerHTML = sellers.map(s => `
+    <div class="seller-manage-row">
+      <span>${escapeHtml(s.name)}</span>
+      <button class="tiny-x" onclick="removeSeller('${s.id}')" title="حذف">✕</button>
+    </div>
+  `).join('');
+}
+
+async function addSeller(){
+  const nameEl = document.getElementById('new-seller-name');
+  const name = nameEl.value.trim();
+  if(!name) return;
+  sellers.push({id:'s_'+Date.now(), name});
+  await saveConfig();
+  fillSellerSelect();
+  nameEl.value='';
+  renderOwnerHome();
+}
+
+async function removeSeller(id){
+  sellers = sellers.filter(s=>s.id!==id);
+  await saveConfig();
+  fillSellerSelect();
+  renderOwnerHome();
+}
+
+function renderProductManageList(){
+  const box = document.getElementById('owner-product-manage');
+  if(!box) return;
+  if(products.length === 0){
+    box.innerHTML = '<div class="empty-note">ماكو منتجات مسجلة</div>';
+    return;
+  }
+  box.innerHTML = products.map(p => `
+    <div class="product-manage-row">
+      <div class="product-manage-top">
+        <span>${escapeHtml(p.name)}${p.commission != null ? '<span class=\"special-tag\">مميز</span>' : ''}</span>
+        <button class="tiny-x" onclick="removeProduct('${p.id}')" title="حذف">✕</button>
+      </div>
+      <div class="product-manage-commission">
+        <label>عمولة القطعة الخاصة بيه (فارغة = الافتراضية ${commissionPerPiece} د.ع)</label>
+        <input type="number" min="0" placeholder="افتراضية" value="${p.commission != null ? p.commission : ''}"
+          onchange="setProductCommission('${p.id}', this.value)">
+      </div>
+    </div>
+  `).join('');
+}
+
+async function addProduct(){
+  const nameEl = document.getElementById('new-product-name');
+  const name = nameEl.value.trim();
+  if(!name) return;
+  products.push({id:'p_'+Date.now(), name, commission:null});
+  await saveConfig();
+  nameEl.value='';
+  renderOwnerHome();
+}
+
+async function removeProduct(id){
+  products = products.filter(p=>p.id!==id);
+  await saveConfig();
+  renderOwnerHome();
+}
+
+async function setProductCommission(id, val){
+  const product = products.find(p=>p.id===id);
+  if(!product) return;
+  const num = parseFloat(val);
+  product.commission = (val === '' || isNaN(num) || num < 0) ? null : num;
+  await saveConfig();
+  fillSellerSelect();
+  renderProductTiles();
+  renderProductManageList();
+}
+
+async function saveShiftConfig(){
+  const m = document.getElementById('cfg-morning-start').value;
+  const sh = document.getElementById('cfg-shared-start').value;
+  const e = document.getElementById('cfg-evening-start').value;
+  const eEnd = document.getElementById('cfg-evening-end').value;
+  const comm = parseFloat(document.getElementById('cfg-commission').value);
+  const msg = document.getElementById('cfg-msg');
+
+  if(![m,sh,e,eEnd].every(v => /^\d{1,2}:\d{2}$/.test(v))){
+    msg.innerHTML = '<div class="msg err">حدد كل الأوقات</div>';
+    return;
+  }
+  if(!(toMinutes(m) < toMinutes(sh) && toMinutes(sh) < toMinutes(e))){
+    msg.innerHTML = '<div class="msg err">تأكد إن الترتيب صحيح: صباحي، بعده مشترك، بعده مسائي</div>';
+    return;
+  }
+  if(isNaN(comm) || comm < 0){
+    msg.innerHTML = '<div class="msg err">اكتب قيمة عمولة صحيحة</div>';
+    return;
+  }
+  shiftConfig = {morningStart:m, sharedStart:sh, eveningStart:e, eveningEnd:eEnd};
+  commissionPerPiece = comm;
+  await saveConfig();
+  msg.innerHTML = '<div class="msg ok">تحفظت الإعدادات ✔</div>';
+  setTimeout(()=>{ msg.innerHTML=''; }, 2000);
+  renderOwnerHome();
+}
+
+/* ========================= UTIL ========================= */
+function escapeHtml(str){
+  return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
+}
+
+/* ========================= INIT ========================= */
+(async function init(){
+  await loadAll();
+  fillSellerSelect();
+  showScreen('screen-seller-login');
+})();
+</script>
+</body>
+</html>
