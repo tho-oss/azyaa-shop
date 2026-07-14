@@ -1517,28 +1517,31 @@ function calcRangeReport(){
 function renderSellerManageList(){
   const box = document.getElementById('owner-seller-manage');
   if(sellers.length === 0){
-    box.innerHTML = '<div class="empty-note">ماكو بائعين مسجلين</div>';
-    return;
-  }
-  box.innerHTML = sellers.map(s => `
+ box.innerHTML = sellers.map(s => `
     <div class="seller-manage-row">
-      <span>${escapeHtml(s.name)}</span>
-      <button class="tiny-x" onclick="removeSeller('${s.id}')" title="حذف">✕</button>
+      <span>${s.name}</span>
+      <button class="btn-del" onclick="removeSeller('${s.id}')">✕</button>
     </div>
   `).join('');
 }
 
- async function addSeller(){
+async function addSeller(){
   const nameEl = document.getElementById('new-seller-name');
+  if(!nameEl) return;
   const name = nameEl.value.trim();
   if(!name) return;
 
-  if(typeof fbDB !== 'undefined') {
-    // حفظ في الفايربيس السحابي فوراً
-    const newRef = fbDB.ref('sellers').push();
-    await newRef.set({ id: newRef.key, name: name });
-  } else {
-    // حل احتياطي لو انقطع النت
+  try {
+    if (typeof firebase !== 'undefined') {
+      const dbRef = firebase.database().ref('sellers');
+      const newRef = dbRef.push();
+      await newRef.set({ id: newRef.key, name: name });
+    } else {
+      sellers.push({id: 's_'+Date.now(), name: name});
+      await saveConfig();
+    }
+  } catch(e) {
+    console.error(e);
     sellers.push({id: 's_'+Date.now(), name: name});
     await saveConfig();
   }
@@ -1546,7 +1549,7 @@ function renderSellerManageList(){
   FillSellerSelect();
   nameEl.value = '';
   renderOwnerHome();
-} 
+}
 
 async function removeSeller(id){
   try {
@@ -1557,46 +1560,11 @@ async function removeSeller(id){
       await saveConfig();
     }
   } catch(e) {
-  async function removeSeller(id){
-  try {
-    if (typeof firebase !== 'undefined') {
-      await firebase.database().ref('sellers/' + id).remove();
-    } else {
-      sellers = sellers.filter(s=>s.id!==id);
-      await saveConfig();
-    }
-  FillSellerSelect();
-  renderOwnerHome();
-}  
-function renderProductManageList(){
-  const box = document.getElementById('owner-product-manage');
-  if(!box) return;
-  if(products.length === 0){
-    box.innerHTML = '<div class="empty-note">ماكو منتجات مسجلة</div>';
-    return;
+    console.error(e);
+    sellers = sellers.filter(s=>s.id!==id);
+    await saveConfig();
   }
-  box.innerHTML = products.map(p => `
-    <div class="product-manage-row">
-      <div class="product-manage-top">
-        <span>${escapeHtml(p.name)}${p.commission != null ? '<span class=\"special-tag\">مميز</span>' : ''}</span>
-        <button class="tiny-x" onclick="removeProduct('${p.id}')" title="حذف">✕</button>
-      </div>
-      <div class="product-manage-commission">
-        <label>عمولة القطعة الخاصة بيه (فارغة = الافتراضية ${commissionPerPiece} د.ع)</label>
-        <input type="number" min="0" placeholder="افتراضية" value="${p.commission != null ? p.commission : ''}"
-          onchange="setProductCommission('${p.id}', this.value)">
-      </div>
-    </div>
-  `).join('');
-}
-
-async function addProduct(){
-  const nameEl = document.getElementById('new-product-name');
-  const name = nameEl.value.trim();
-  if(!name) return;
-  products.push({id:'p_'+Date.now(), name, commission:null});
-  await saveConfig();
-  nameEl.value='';
+  FillSellerSelect();
   renderOwnerHome();
 }
 
