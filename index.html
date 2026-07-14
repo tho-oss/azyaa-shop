@@ -683,15 +683,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <script>
 /* ====== Firebase setup — عدّل هذا القسم ببيانات مشروعك من Firebase Console ====== */
-const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  databaseURL: "https://YOUR_PROJECT_ID-default-rtdb.firebaseio.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+
 
 /* window.storage: نفس واجهة تخزين Claude تماماً، بس مربوطة بـ Firebase Realtime Database
    بدلاً من التخزين المحلي، حتى كل الأجهزة (المالك/الكاشير/البائعين) تشوف نفس البيانات لحظياً.
@@ -700,9 +692,16 @@ window.storage = (function(){
   let fbReady = false;
   let fbDB = null;
   try{
-    if(typeof firebase !== 'undefined' && firebaseConfig.apiKey !== 'YOUR_API_KEY'){
-      firebase.initializeApp(firebaseConfig);
-      fbDB = firebase.database();
+    firebase.initializeApp({
+  apiKey: "AIzaSyBi1yhOonLtD3rK-VEmeU_a6bBBOLrYa00",
+  authDomain: "azyaa-shop.firebaseapp.com",
+  databaseURL: "https://azyaa-shop-default-rtdb.firebaseio.com",
+  projectId: "azyaa-shop",
+  storageBucket: "azyaa-shop.firebasestorage.app",
+  messagingSenderId: "512702638642",
+  appId: "1:512702638642:web:6b23b818b2c2ad8f442a2b"
+});
+fbDB = firebase.database();
       fbReady = true;
     }else{
       console.warn('Firebase مو معدّل بعد — البرنامج يستخدم تخزين محلي مؤقت بالجهاز بس.');
