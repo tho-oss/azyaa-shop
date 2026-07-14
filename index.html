@@ -1564,12 +1564,7 @@ async function removeSeller(id){
   FillSellerSelect();
   renderOwnerHome();
 }
-  حل احتياطي في حال انقطاع الإنترنت
-    sellers = sellers.filter(s=>s.id!==id);
-    await saveConfig();
-  }
-  FillSellerSelect();
-  renderOwnerHome();
+
 }
 
 function renderProductManageList(){
