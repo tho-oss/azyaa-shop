@@ -1528,21 +1528,36 @@ function renderSellerManageList(){
   `).join('');
 }
 
-async function addSeller(){
+ async function addSeller(){
   const nameEl = document.getElementById('new-seller-name');
   const name = nameEl.value.trim();
   if(!name) return;
-  sellers.push({id:'s_'+Date.now(), name});
-  await saveConfig();
-  fillSellerSelect();
-  nameEl.value='';
+
+  if(typeof fbDB !== 'undefined') {
+    // حفظ في الفايربيس السحابي فوراً
+    const newRef = fbDB.ref('sellers').push();
+    await newRef.set({ id: newRef.key, name: name });
+  } else {
+    // حل احتياطي لو انقطع النت
+    sellers.push({id: 's_'+Date.now(), name: name});
+    await saveConfig();
+  }
+
+  FillSellerSelect();
+  nameEl.value = '';
   renderOwnerHome();
-}
+} 
 
 async function removeSeller(id){
-  sellers = sellers.filter(s=>s.id!==id);
-  await saveConfig();
-  fillSellerSelect();
+  if(typeof fbDB !== 'undefined') {
+    // الحذف من الفايربيس السحابي فوراً باستخدام الـ id
+    await fbDB.ref('sellers/' + id).remove();
+  } else {
+    // حل احتياطي في حال انقطاع الإنترنت
+    sellers = sellers.filter(s=>s.id!==id);
+    await saveConfig();
+  }
+  FillSellerSelect();
   renderOwnerHome();
 }
 
