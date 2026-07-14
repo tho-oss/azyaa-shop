@@ -1565,11 +1565,6 @@ async function removeSeller(id){
       sellers = sellers.filter(s=>s.id!==id);
       await saveConfig();
     }
-  } catch(e) {
-    console.error(e);
-    sellers = sellers.filter(s=>s.id!==id);
-    await saveConfig();
-  }
   FillSellerSelect();
   renderOwnerHome();
 }  
