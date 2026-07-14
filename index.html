@@ -1557,16 +1557,22 @@ async function removeSeller(id){
       await saveConfig();
     }
   } catch(e) {
+  async function removeSeller(id){
+  try {
+    if (typeof firebase !== 'undefined') {
+      await firebase.database().ref('sellers/' + id).remove();
+    } else {
+      sellers = sellers.filter(s=>s.id!==id);
+      await saveConfig();
+    }
+  } catch(e) {
     console.error(e);
     sellers = sellers.filter(s=>s.id!==id);
     await saveConfig();
   }
   FillSellerSelect();
   renderOwnerHome();
-}
-
-}
-
+}  
 function renderProductManageList(){
   const box = document.getElementById('owner-product-manage');
   if(!box) return;
