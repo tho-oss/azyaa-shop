@@ -487,7 +487,7 @@
         <input type="number" id="sale-total-price" placeholder="مثلاً: 160" inputmode="numeric" oninput="updatePriceHint()">
         <div class="price-hint" id="sale-price-hint"></div>
       </div>
-      <button class="btn btn-primary" onclick="addSale()">تسجيل البيع</button>
+      <button class="btn btn-primary" id="btn-add-sale" onclick="addSale()">تسجيل البيع</button>
     </div>
   </div>
 
@@ -1119,8 +1119,11 @@ function renderSellerHome(){
   renderCartSummary();
 }
 
+let isSavingSale = false;
 async function addSale(){
+  if(isSavingSale) return; // منع الضغط المزدوج اللي يسبب تسجيل نفس العملية مرتين
   const msg = document.getElementById('sale-add-msg');
+  const btn = document.getElementById('btn-add-sale');
   const items = collectItems();
   const enteredPrice = parseFloat(document.getElementById('sale-total-price').value);
 
@@ -1132,6 +1135,9 @@ async function addSale(){
     msg.innerHTML = '<div class="msg err">اكتب السعر الكلي للعملية</div>';
     return;
   }
+
+  isSavingSale = true;
+  if(btn){ btn.disabled = true; btn.style.opacity = '.6'; }
 
   const totalPrice = enteredPrice * 1000;
   const pieceCount = items.reduce((a,it)=>a+it.qty, 0);
@@ -1152,6 +1158,9 @@ async function addSale(){
     msg.innerHTML = '<div class="msg ok">تسجلت العملية ✔</div>';
   }catch(e){
     msg.innerHTML = '<div class="msg err">صار خطأ بالحفظ، حاول مرة ثانية</div>';
+  }finally{
+    isSavingSale = false;
+    if(btn){ btn.disabled = false; btn.style.opacity = ''; }
   }
 
   resetSaleForm();
