@@ -331,9 +331,29 @@
   .segmented button.active{
     background:var(--card); color:var(--label); box-shadow:0 1px 3px rgba(0,0,0,.15);
   }
+  .conn-badge{
+    position:fixed; top:10px; left:10px; z-index:9999;
+    display:flex; align-items:center; gap:6px;
+    padding:5px 10px; border-radius:999px;
+    font-size:12px; font-weight:700;
+    box-shadow:0 2px 8px rgba(0,0,0,.15);
+    transition:background .25s, color .25s;
+    direction:rtl;
+  }
+  .conn-badge .dot{
+    width:8px; height:8px; border-radius:50%; flex-shrink:0;
+  }
+  .conn-badge.online{ background:#e6f7ec; color:#1c7a3d; }
+  .conn-badge.online .dot{ background:#22b756; }
+  .conn-badge.offline{ background:#fdecec; color:#b3251f; }
+  .conn-badge.offline .dot{ background:#e0342b; animation:pulse-dot 1.2s infinite; }
+  @keyframes pulse-dot{
+    0%,100%{ opacity:1; } 50%{ opacity:.35; }
+  }
 </style>
 </head>
 <body>
+<div id="conn-badge" class="conn-badge offline"><span class="dot"></span><span id="conn-badge-text">جاري التحقق...</span></div>
 <svg style="display:none">
   <symbol id="i-key" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
     <path d="M15 3a5 5 0 0 0-4.9 6.1L3 16.2V20h3.8l1-1h2v-2h2l1-1h1.1A5 5 0 1 0 15 3z"/>
@@ -1647,8 +1667,35 @@ function escapeHtml(str){
   return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
+function setConnBadge(isOnline){
+  const badge = document.getElementById('conn-badge');
+  const text = document.getElementById('conn-badge-text');
+  if(!badge || !text) return;
+  if(isOnline){
+    badge.className = 'conn-badge online';
+    text.textContent = 'متصل';
+  }else{
+    badge.className = 'conn-badge offline';
+    text.textContent = 'بدون انترنت';
+  }
+}
+
+function monitorConnection(){
+  // إذا صار انقطاع فعلي بجهاز الموظف، نعرضها فوراً بدون ما ننتظر فايربيس
+  window.addEventListener('offline', () => setConnBadge(false));
+
+  try{
+    firebase.database().ref('.info/connected').on('value', (snap) => {
+      setConnBadge(snap.val() === true);
+    });
+  }catch(e){
+    setConnBadge(false);
+  }
+}
+
 /* ========================= INIT ========================= */
 (async function init(){
+  monitorConnection();
   try{
     await loadAll();
   }catch(e){
