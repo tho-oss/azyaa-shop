@@ -613,6 +613,7 @@
         <input type="text" id="new-seller-name" placeholder="اسم البائع">
       </div>
       <button class="btn btn-primary btn-small" onclick="addSeller()">إضافة بائع</button>
+      <div id="add-seller-msg"></div>
     </div>
 
     <div class="receipt">
@@ -625,6 +626,7 @@
         <input type="text" id="new-product-name" placeholder="مثال: قميص">
       </div>
       <button class="btn btn-primary btn-small" onclick="addProduct()">إضافة منتج</button>
+      <div id="add-product-msg"></div>
     </div>
 
     <div class="receipt">
@@ -1164,6 +1166,7 @@ async function addSale(){
     msg.innerHTML = '<div class="msg err">اكتب السعر الكلي للعملية</div>';
     return;
   }
+  if(!requireOnline('sale-add-msg')) return;
 
   isSavingSale = true;
   if(btn){ btn.disabled = true; btn.style.opacity = '.6'; }
@@ -1586,10 +1589,12 @@ async function addSeller(){
   if(!nameEl) return;
   const name = nameEl.value.trim();
   if(!name) return;
+  if(!requireOnline('add-seller-msg')) return;
 
   sellers.push({id: 's_'+Date.now(), name: name});
   await saveConfig();
 
+  document.getElementById('add-seller-msg').innerHTML = '';
   fillSellerSelect();
   nameEl.value = '';
   renderOwnerHome();
@@ -1607,10 +1612,12 @@ async function addProduct(){
   if(!nameEl) return;
   const name = nameEl.value.trim();
   if(!name) return;
+  if(!requireOnline('add-product-msg')) return;
 
   products.push({id: 'p_'+Date.now(), name: name, commission: null});
   await saveConfig();
 
+  document.getElementById('add-product-msg').innerHTML = '';
   nameEl.value = '';
   renderProductTiles();
   renderProductManageList();
@@ -1667,7 +1674,10 @@ function escapeHtml(str){
   return String(str).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
+let isFirebaseConnected = false;
+
 function setConnBadge(isOnline){
+  isFirebaseConnected = isOnline;
   const badge = document.getElementById('conn-badge');
   const text = document.getElementById('conn-badge-text');
   if(!badge || !text) return;
@@ -1678,6 +1688,17 @@ function setConnBadge(isOnline){
     badge.className = 'conn-badge offline';
     text.textContent = 'بدون انترنت';
   }
+}
+
+// يمنع أي عملية إضافة/حفظ إذا كان الجهاز مقطوع عن فايربيس فعلياً،
+// حتى ما نخلي الموظف يحس إن العملية انسجلت وهي فعلياً ضايعة.
+function requireOnline(msgElId){
+  if(isFirebaseConnected) return true;
+  const el = msgElId ? document.getElementById(msgElId) : null;
+  if(el){
+    el.innerHTML = '<div class="msg err">🔴 ماكو انترنت هسه — انتظر لين تصير النقطة خضرا بأعلى الشاشة وحاول مرة ثانية</div>';
+  }
+  return false;
 }
 
 function monitorConnection(){
