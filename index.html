@@ -717,6 +717,15 @@ window.storage = (function(){
       if(!fbDB) throw new Error('Firebase غير متصل');
       await fbDB.ref(pathOf(key)).set(value);
       return {key, value};
+    },
+    async getAll(path){
+      if(!fbDB) throw new Error('Firebase غير متصل');
+      const snap = await fbDB.ref(pathOf(path)).get();
+      return snap.exists() ? snap.val() : {};
+    },
+    async remove(path){
+      if(!fbDB) throw new Error('Firebase غير متصل');
+      await fbDB.ref(pathOf(path)).remove();
     }
   };
 })();
@@ -787,8 +796,8 @@ async function loadAll(){
     await saveConfig();
   }
   try{
-    const salesRes = await window.storage.get(SALES_KEY, true);
-    sales = salesRes && salesRes.value ? JSON.parse(salesRes.value) : [];
+    const salesObj = await window.storage.getAll(SALES_KEY, true);
+    sales = salesObj ? Object.values(salesObj) : [];
   }catch(e){
     sales = [];
   }
@@ -821,8 +830,8 @@ function renderThemePicker(){
 async function saveConfig(){
   await window.storage.set(CONFIG_KEY, JSON.stringify({sellers, products, ownerPassword, cashierUsername, cashierPassword, shiftConfig, commissionPerPiece, theme}), true);
 }
-async function saveSales(){
-  await window.storage.set(SALES_KEY, JSON.stringify(sales), true);
+async function saveSaleRecord(sale){
+  await window.storage.set(`${SALES_KEY}:${sale.id}`, sale, true);
 }
 
 /* ========================= NAV ========================= */
@@ -933,7 +942,7 @@ async function resetAllSales(){
 
   sales = [];
   try{
-    await window.storage.set(SALES_KEY, JSON.stringify(sales), true);
+    await window.storage.remove(SALES_KEY, true);
   }catch(e){
     msg.innerHTML = '<div class="msg err">صار خطأ بالحفظ، حاول مرة ثانية</div>';
     return;
@@ -1142,7 +1151,7 @@ async function addSale(){
   const totalPrice = enteredPrice * 1000;
   const pieceCount = items.reduce((a,it)=>a+it.qty, 0);
   const now = new Date();
-  sales.push({
+  const sale = {
     id: 'sale_' + Date.now() + '_' + Math.random().toString(36).slice(2,7),
     sellerId: currentUser.id,
     sellerName: currentUser.name,
@@ -1151,21 +1160,24 @@ async function addSale(){
     totalPrice,
     ts: now.toISOString(),
     period: getPeriod(now)
-  });
+  };
+  sales.push(sale);
 
-  try{
-    await saveSales();
-    msg.innerHTML = '<div class="msg ok">تسجلت العملية ✔</div>';
-  }catch(e){
-    msg.innerHTML = '<div class="msg err">صار خطأ بالحفظ، حاول مرة ثانية</div>';
-  }finally{
-    isSavingSale = false;
-    if(btn){ btn.disabled = false; btn.style.opacity = ''; }
-  }
-
+  // نعرض التأكيد ونصفر الفورم فوراً، بدون ما ننتظر رد السيرفر
+  msg.innerHTML = '<div class="msg ok">تسجلت العملية ✔</div>';
   resetSaleForm();
   renderSellerHome();
+  isSavingSale = false;
+  if(btn){ btn.disabled = false; btn.style.opacity = ''; }
   setTimeout(()=>{ msg.innerHTML=''; }, 2500);
+
+  // الحفظ الفعلي بفايربيس يصير بالخلفية (سجل مستقل لكل عملية، سريع وما يصطدم مع بائع ثاني يسجل بنفس اللحظة)
+  try{
+    await saveSaleRecord(sale);
+  }catch(e){
+    const warn = document.getElementById('sale-add-msg');
+    if(warn) warn.innerHTML = '<div class="msg err">تنبيه: العملية الأخيرة ما نحفظت عالسيرفر (تأكد من النت)</div>';
+  }
 }
 
 /* ========================= CASHIER HOME ========================= */
